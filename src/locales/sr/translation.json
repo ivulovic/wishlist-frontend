@@ -1,0 +1,92 @@
+{
+  "homePage": {
+    "title": "Lista Želja",
+    "subtitle": "Sve želje na jednom mestu"
+  },
+  "features": {
+    "createTitle": "Napravite svoju listu želja",
+    "createFeature": "Želje mogu biti bilo šta, poput zabavnih stvari, zanimljivih predmeta ili nečega za posebnu priliku.",
+    "accessTitle": "Podelite želje sa drugima",
+    "accessFeature": "Sve vaše liste želja možete podeliti sa prijateljima, porodicom ili kolegama vrlo jednostavno."
+  },
+  "settingsPage": {
+    "themeLabel": "Tema",
+    "languageLabel": "Jezik"
+  },
+
+  "themeSwitch": {
+    "selectTheme": "Odaberite temu",
+    "systemTheme": "Sistemska",
+    "lightTheme": "Svetla",
+    "darkTheme": "Tamna"
+  },
+  "i18nFeature": {
+    "selectLanguage": "Odaberite jezik"
+  },
+  "authPage": {
+    "signIn": "Prijavite se",
+    "signUp": "Registracija",
+    "username": "Korisničko ime",
+    "usernameOrEmail": "E-mail ili Korisničko ime",
+    "usernameError": "Korisničko ime sme da se sastoji samo iz slova i brojeva.",
+    "email": "E-mail",
+    "password": "Lozinka",
+    "passwordConfirm": "Potvrdite Lozinku",
+    "signInSubtitle": "Koristite svoj Wishy nalog",
+    "signUpSubtitle": "Napravite svoj Wishy nalog",
+    "submit": "Potvrdi"
+  },
+
+  "userPage": {
+    "noResults": "Korisnik trenutno nema nijednu želju."
+  },
+  "wishlists": {
+    "title": "Lista želja",
+    "noResults": "Trenutno nemate nijednu želju.",
+    "lead": "",
+    "seeProduct": "Pogledaj proizvod na {{storeName}} sajtu"
+  },
+  "navbar": {
+    "signOut": "Odjava",
+    "signIn": "Prijava",
+    "signUp": "Registracija",
+    "wishlists": "Lista želja",
+    "discover": "Istraži",
+    "stores": "Prodavnice",
+    "administrator": "Administrator",
+    "settings": "Podešavanja",
+    "help": "Pomoć",
+    "users": "Korisnici",
+    "categories": "Kategorije",
+    "favorites": "Omiljene",
+    "searchPlaceholder": "Pronađite svoje prijatelje"
+  },
+  "landingPage": {
+    "paragraphMain": "Da li ste ikada ikome rekli sve svoje želje?",
+    "paragraphSecondary": "{{websiteName}} je mesto gde se možete pobrinuti o svakoj Vašoj želji!",
+    "buttonText": "Dodajte želju!",
+    "homeDecor": "Kućna dekoracija",
+    "books": "Knjige",
+    "travel": "Putovanje",
+    "tech": "Tehnologija",
+    "clothes": "Odeća",
+    "sport": "Sport",
+    "categorySectionTitle": "Sve kategorije na jednom mestu",
+    "categorySectionSubtitle": "kategorije",
+    "categorySectionDescription": "Postoji mnoštvo kategorija proizvoda koje možete da poželite i ubacite u svoju listu želja. Ovde smo nabrojali samo neke od njih.",
+    "fulfilledWishes": "ispunjenih želja",
+    "activeWishes": "želja",
+    "activeUsers": "korisnika",
+    "statisticCardsTitle": " do sada",
+    "storesTitle": "Vaše omiljene prodavnice",
+    "storesSubtitle": "Prodavnice",
+    "storesDescription": "Podržavamo mnogo prodavnica širom sveta! Ovu su najčešće korišćene!",
+    "howToUseSubtitle": "Kako se koristi?",
+    "howToUseTitle": "Do želje kroz 3 jednostavna koraka",
+    "howToUseDescription": "Sa našim jednostavnim i lakim načinom korišćenja od želja Vas dele sekunde.",
+
+    "wishStep1": "Unesite web link proizvoda",
+    "wishStep2": "Sačekajte par sekundi",
+    "wishStep3": "Vaša nova želja je dodata"
+  }
+}

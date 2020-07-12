@@ -1,19 +1,95 @@
 {
-  "routingFeature": {
-    "title": "Industry-standard Routing",
-    "description": "It's natural to want to add pages (e.g. `/about`) to your application, and routing makes this possible."
+  "homePage": {
+    "title": "Wishlists",
+    "subtitle": "All wishes in one place"
+  },
+  "settingsPage": {
+    "themeLabel": "Theme",
+    "languageLabel": "Language"
+  },
+  "features": {
+    "createTitle": "Create personal wishlist",
+    "createFeature": "Wishes can be anything, like fun stuff, interesting items, or something for a special occasion.",
+    "accessTitle": "Share wishlists",
+    "accessFeature": "All your wishlists can be shared with friends, family or colleagues very easely."
+  },
+  "themeSwitch": {
+    "selectTheme": "Select theme",
+    "systemTheme": "System",
+    "lightTheme": "Light",
+    "darkTheme": "Dark"
   },
   "i18nFeature": {
-    "title": "i18n Internationalization & Pluralization",
-    "selectLanguage": "Select Language",
-    "description": "Scalable apps need to support multiple languages, easily add and support multiple languages. Change the language below to see how instantly it updates the page without refreshing."
+    "selectLanguage": "Select Language"
   },
-  "feedbackFeature": {
-    "title": "Instant Feedback",
-    "description": "Enjoy the best DX and code your app at the speed of thought! Your saved changes to the CSS and JS are reflected instantaneously without refreshing the page."
+  "wishlists": {
+    "title": "Wishlists",
+    "noResults": "You don't have any wishes at the moment.",
+    "lead": "",
+    "seeProduct": "See this product on {{storeName}} website"
   },
-  "scaffoldingFeature": {
-    "title": "Quick Scaffolding",
-    "description": "Automate the creation of components, features, routes, selectors and sagas - and their tests - right from the CLI! Avoid fighting the glue of your code and focus on your app!"
+  "userPage": {
+    "noResults": "This user has no wishes at the moment."
+  },
+  "authPage": {
+    "signIn": "Sign In",
+    "signUp": "Register",
+    "email": "E-mail",
+    "username": "Username",
+    "usernameOrEmail": "Username or E-mail",
+    "usernameError": "Username should contain only letters and numbers.",
+    "password": "Password",
+    "passwordConfirm": "Confirm Password",
+    "signInSubtitle": "Use Your Wishy Account",
+    "signUpSubtitle": "Create your Wishy Account",
+    "submit": "SUBMIT"
+  },
+
+  "navbar": {
+    "signOut": "Sign out",
+    "signIn": "Sign in",
+    "signUp": "Register",
+    "wishlists": "Wishlists",
+    "discover": "Discover",
+    "stores": "Stores",
+    "administrator": "Administrator",
+    "settings": "Settings",
+    "help": "Help",
+    "users": "Users",
+    "categories": "Categories",
+    "favorites": "Favorites",
+    "searchPlaceholder": "Find your friends"
+  },
+  "landingPage": {
+    "paragraphMain": "Did you ever tell anyone all your wishes?",
+    "paragraphSecondary": "{{websiteName}} is place where you can take care of all your wishes!",
+    "buttonText": "Add wish!",
+    "homeDecor": "Home decor",
+    "books": "Books",
+    "travel": "Travel",
+    "tech": "Technology",
+    "clothes": "Clothes",
+    "sport": "Sport",
+    "fulfilledWishes": "wishes fulfilled",
+    "activeWishes": "wishes",
+    "activeUsers": "users",
+    "statisticCardsTitle": " until now",
+    "howEasyTitle": "Easy as Google search",
+    "storesTitle": "Your favorite stores",
+    "storesSubtitle": "Stores",
+    "storesDescription": "We support lot of stores around the world! These are the most used.",
+    "howToUseTitle": "Make a wish in 3 simple steps",
+    "howToUseSubtitle": "How to use?",
+    "howToUseDescription": "With our easy and fast approach you are seconds away of your wishes.",
+    "categorySectionTitle": "All categories in one place",
+    "categorySectionDescription": "There's lots of product categories you can wish and put into your wish list. Here we listed just few of them.",
+    "categorySectionSubtitle": "Categories",
+    "wishStep1": "Paste the product web link",
+    "wishStep2": "Wait few seconds",
+    "wishStep3": "Your new wish is added"
+  },
+  "administratorNav": {
+    "stores": "Stores",
+    "users": "Users"
   }
 }

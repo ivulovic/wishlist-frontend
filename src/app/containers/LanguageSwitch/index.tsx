@@ -17,6 +17,15 @@ export function LanguageSwitch() {
       <FormLabel>{t(translations.i18nFeature.selectLanguage())}</FormLabel>
       <Languages>
         <Radio
+          id="sr"
+          label="Srpski"
+          className="radio"
+          name="language"
+          onChange={handleLanguageChange}
+          value="sr"
+          isSelected={i18n.language === 'sr'}
+        />
+        <Radio
           id="en"
           label="English"
           className="radio"
@@ -25,7 +34,7 @@ export function LanguageSwitch() {
           value="en"
           isSelected={i18n.language === 'en'}
         />
-        <Radio
+        {/* <Radio
           id="tr"
           label="Deutsch"
           className="radio"
@@ -33,7 +42,7 @@ export function LanguageSwitch() {
           onChange={handleLanguageChange}
           value="de"
           isSelected={i18n.language === 'de'}
-        />
+        /> */}
       </Languages>
     </Wrapper>
   );

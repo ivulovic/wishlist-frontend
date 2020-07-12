@@ -1,57 +1,102 @@
 import React from 'react';
-import styled from 'styled-components/macro';
-import { ReactComponent as DocumentationIcon } from './assets/documentation-icon.svg';
-import { ReactComponent as GithubIcon } from './assets/github-icon.svg';
+import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { translations } from 'locales/i18n';
+import { NavBarProps } from './types';
+import styled from 'styled-components';
+import { StyleConstants } from 'styles/StyleConstants';
+import { ReactComponent as LogoIcon } from './assets/logo.svg';
+import { FiShoppingBag, FiSettings, FiPower, FiInfo } from 'react-icons/fi';
 
-export function Nav() {
+export function Nav(props: NavBarProps) {
+  const { t } = useTranslation();
+  const { isLoggedIn, isSuperUser } = props;
   return (
-    <Wrapper>
-      <Item
-        href="https://cansahin.gitbook.io/react-boilerplate-cra-template/"
-        target="_blank"
-        title="Documentation Page"
-        rel="noopener noreferrer"
-      >
-        <DocumentationIcon />
-        Documentation
-      </Item>
-      <Item
-        href="https://github.com/react-boilerplate/react-boilerplate-cra-template"
-        target="_blank"
-        title="Github Page"
-        rel="noopener noreferrer"
-      >
-        <GithubIcon />
-        Github
-      </Item>
-    </Wrapper>
+    <nav>
+      {/* NOT LOGGED IN */}
+      <Wrapper>
+        <Title>
+          <NavLink to="/">
+            <LogoIcon className="logo-icon" />
+          </NavLink>
+        </Title>
+
+        <div className="nav-routes">
+          {!isLoggedIn && (
+            <>
+              <NavLink to="/stores">
+                <FiShoppingBag /> {t(translations.navbar.stores())}
+              </NavLink>
+
+              <NavLink to="/sign-in">{t(translations.navbar.signIn())}</NavLink>
+            </>
+          )}
+
+          {/* LOGGED IN */}
+
+          {isLoggedIn && (
+            <>
+              <NavLink to="/stores">
+                <FiShoppingBag size={24} /> {t(translations.navbar.stores())}
+              </NavLink>
+
+              {isSuperUser && (
+                <>
+                  <NavLink to="/administrator">
+                    {t(translations.navbar.administrator())}
+                  </NavLink>
+                </>
+              )}
+              <NavLink to="/settings">
+                <FiSettings size={24} /> {t(translations.navbar.settings())}
+              </NavLink>
+              <NavLink to="/sign-out" title="Sign Out">
+                <FiPower size={24} /> {t(translations.navbar.signOut())}
+              </NavLink>
+            </>
+          )}
+        </div>
+      </Wrapper>
+      <div>
+        <NavLink to="/help">
+          <FiInfo size={24} /> {t(translations.navbar.help())}
+        </NavLink>
+      </div>
+    </nav>
   );
 }
 
-const Wrapper = styled.nav`
+const Wrapper = styled.header`
+  box-shadow: 0 1px 0 0 ${p => p.theme.borderLight};
+  height: ${StyleConstants.NAV_BAR_HEIGHT};
   display: flex;
-  margin-right: -1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  background-color: ${p => p.theme.background};
+  z-index: 2;
+
+  @supports (backdrop-filter: blur(10px)) {
+    backdrop-filter: blur(10px);
+    background-color: ${p =>
+      p.theme.background.replace(
+        /rgba?(\(\s*\d+\s*,\s*\d+\s*,\s*\d+)(?:\s*,.+?)?\)/,
+        'rgba$1,0.75)',
+      )};
+  }
 `;
 
-const Item = styled.a`
-  color: ${p => p.theme.primary};
-  cursor: pointer;
+const Title = styled.div`
+  font-size: 1.25rem;
   text-decoration: none;
+  color: ${p => p.theme.text};
+  font-weight: bolder;
+  letter-spacing: 1px;
+
   display: flex;
-  padding: 0.25rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
   align-items: center;
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  &:active {
-    opacity: 0.4;
-  }
-
-  .icon {
-    margin-right: 0.25rem;
+  justify-content: center;
+  .logo-icon {
+    margin-right: 10px;
   }
 `;

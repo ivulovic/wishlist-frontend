@@ -3,38 +3,22 @@ import styled from 'styled-components/macro';
 import { Logos } from './Logos';
 import { Title } from 'app/containers/HomePage/components/Title';
 import { Lead } from 'app/containers/HomePage/components/Lead';
-import { A } from 'app/components/A';
+import { translations } from 'locales/i18n';
+import { useTranslation } from 'react-i18next';
 
 export function Masthead() {
+  const { t } = useTranslation();
   return (
     <Wrapper>
       <Logos />
-      <Title>React Boilerplate meets CRA</Title>
-      <Lead>
-        Now you can use the{' '}
-        <A
-          href="https://www.reactboilerplate.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          React Boilerplate
-        </A>{' '}
-        as a{' '}
-        <A
-          href="https://github.com/facebook/create-react-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Create React App
-        </A>{' '}
-        template.
-      </Lead>
+      <Title>{t(translations.homePage.title())}</Title>
+      <Lead>{t(translations.homePage.subtitle())}</Lead>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.main`
-  height: 60vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;

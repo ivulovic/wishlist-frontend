@@ -1,5 +1,10 @@
 import { GithubRepoFormState } from 'app/containers/GithubRepoForm/types';
+import { AdministratorState } from 'app/containers/AdministratorPage/types';
 import { ThemeState } from 'styles/theme/types';
+import { WishlistsState } from 'app/containers/WishlistsPage/types';
+import { UsersState } from 'app/containers/UsersPage/types';
+import { StoresState } from 'app/containers/StoresPage/types';
+import { GlobalState } from 'app/providers/GlobalProvider/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -11,5 +16,10 @@ import { ThemeState } from 'styles/theme/types';
 export interface RootState {
   theme?: ThemeState;
   githubRepoForm?: GithubRepoFormState;
+  administrator?: AdministratorState;
+  wishlists?: WishlistsState;
+  users?: UsersState;
+  stores?: StoresState;
+  global?: GlobalState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

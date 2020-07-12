@@ -6,8 +6,11 @@ import { changeTheme, selectThemeKey } from 'styles/theme/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveTheme } from 'styles/theme/utils';
 import { ThemeKeyType } from 'styles/theme/types';
+import { useTranslation } from 'react-i18next';
+import { translations } from 'locales/i18n';
 
 export function ThemeSwitch() {
+  const { t } = useTranslation();
   const theme = useSelector(selectThemeKey);
   const dispatch = useDispatch();
 
@@ -19,11 +22,11 @@ export function ThemeSwitch() {
 
   return (
     <Wrapper>
-      <FormLabel>Select Theme</FormLabel>
+      <FormLabel>{t(translations.themeSwitch.selectTheme())}</FormLabel>
       <Themes>
         <Radio
           id="system"
-          label="System theme"
+          label={t(translations.themeSwitch.systemTheme())}
           className="radio"
           name="theme"
           onChange={handleThemeChange}
@@ -32,7 +35,7 @@ export function ThemeSwitch() {
         />
         <Radio
           id="light"
-          label="Light"
+          label={t(translations.themeSwitch.lightTheme())}
           className="radio"
           name="theme"
           onChange={handleThemeChange}
@@ -41,7 +44,7 @@ export function ThemeSwitch() {
         />
         <Radio
           id="dark"
-          label="Dark"
+          label={t(translations.themeSwitch.darkTheme())}
           className="radio"
           name="theme"
           onChange={handleThemeChange}

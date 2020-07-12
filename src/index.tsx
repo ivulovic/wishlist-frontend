@@ -7,6 +7,7 @@
 
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -27,9 +28,13 @@ import { configureAppStore } from 'store/configureStore';
 
 import { ThemeProvider } from 'styles/theme/ThemeProvider';
 
+import AuthProvider from 'app/providers/AuthProvider';
+import NotificationProvider from 'app/providers/NotificationProvider';
+import GlobalProvider from 'app/providers/GlobalProvider';
+
 // Observe loading of Inter (to remove 'Inter', remove the <link> tag in
 // the index.html file and this observer)
-const openSansObserver = new FontFaceObserver('Inter', {});
+const openSansObserver = new FontFaceObserver('Roboto', {});
 
 // When Inter is loaded, add a font-family using Inter to the body
 openSansObserver.load().then(() => {
@@ -46,6 +51,9 @@ const ConnectedApp = ({ Component }: Props) => (
   <Provider store={store}>
     <ThemeProvider>
       <HelmetProvider>
+        <AuthProvider />
+        <GlobalProvider />
+        <NotificationProvider />
         <React.StrictMode>
           <Component />
         </React.StrictMode>
