@@ -40,8 +40,8 @@
     "usernameError": "Username should contain only letters and numbers.",
     "password": "Password",
     "passwordConfirm": "Confirm Password",
-    "signInSubtitle": "Use Your Wishy Account",
-    "signUpSubtitle": "Create your Wishy Account",
+    "signInSubtitle": "Use Your {{websiteName}} Account",
+    "signUpSubtitle": "Create your {{websiteName}} Account",
     "submit": "SUBMIT"
   },
 

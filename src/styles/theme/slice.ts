@@ -33,6 +33,16 @@ export const selectThemeKey = createSelector(
   theme => theme.selected,
 );
 
+export const selectSelectedThemeKey = createSelector(
+  [(state: RootState) => state.theme || initialState],
+  theme => {
+    if (theme.selected === 'system') {
+      return isSystemDark ? 'dark' : 'light';
+    }
+    return theme.selected;
+  },
+);
+
 export const { changeTheme } = themeSlice.actions;
 export const reducer = themeSlice.reducer;
 export const themeSliceKey = themeSlice.name;

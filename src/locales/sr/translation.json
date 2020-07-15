@@ -32,8 +32,8 @@
     "email": "E-mail",
     "password": "Lozinka",
     "passwordConfirm": "Potvrdite Lozinku",
-    "signInSubtitle": "Koristite svoj Wishy nalog",
-    "signUpSubtitle": "Napravite svoj Wishy nalog",
+    "signInSubtitle": "Koristite svoj {{websiteName}} nalog",
+    "signUpSubtitle": "Napravite svoj {{websiteName}} nalog",
     "submit": "Potvrdi"
   },
 

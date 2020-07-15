@@ -80,9 +80,7 @@ export function LandingPage() {
             {t(translations.landingPage.paragraphMain())}
           </h1>
           <h2 className="paragraph-secondary">
-            <strong style={{ color: 'var(--primary)' }}>
-              {websiteLogoText}
-            </strong>
+            <strong>{websiteLogoText}</strong>
             {t(translations.landingPage.paragraphSecondary())}
           </h2>
           <h2 className="paragraph-teritary">

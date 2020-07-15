@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { login } from 'app/providers/AuthProvider/actions';
 import { useTranslation } from 'react-i18next';
 import { translations } from 'locales/i18n';
+import { websiteName } from 'settings';
 
 export function LoginPage() {
   const { t } = useTranslation();
@@ -33,7 +34,11 @@ export function LoginPage() {
             <div className="centered-form-wrapper">
               <div className="form-header">
                 <h2>{t(translations.authPage.signIn())}</h2>
-                <h5>{t(translations.authPage.signInSubtitle())}</h5>
+                <h5>
+                  {t(translations.authPage.signInSubtitle(), {
+                    websiteName: websiteName,
+                  })}
+                </h5>
               </div>
               <div className="form-body shrink-children">
                 <div>

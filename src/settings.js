@@ -10,11 +10,11 @@
  * @data {string} websiteSupportEmail - Support Email
  * @data {Date} copyrightLastYear - Value of present Year
  */
-export const websiteLogoText = 'kindobel';
-export const websiteName = 'Vukily';
-export const websiteShortName = 'VKLY';
-export const websiteContactEmail = 'info@vukily.com';
-export const websiteSupportEmail = 'support@vukily.com';
+export const websiteLogoText = 'spisko';
+export const websiteName = 'spisko';
+export const websiteShortName = 'spisko';
+export const websiteContactEmail = 'info@spisko.com';
+export const websiteSupportEmail = 'support@spisko.com';
 export const copyrightLastYear = new Date().getFullYear();
 
 /**
