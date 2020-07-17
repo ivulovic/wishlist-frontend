@@ -1,0 +1,11 @@
+.website-layout-full {
+  display: grid;
+  grid-template-columns: 100%;
+}
+.website-layout-split {
+  display: grid;
+  grid-template-columns: 250px auto;
+}
+.main-content {
+  padding: 0 15px;
+}

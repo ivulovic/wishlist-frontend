@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { translations } from 'locales/i18n';
 import { register } from 'app/providers/AuthProvider/actions';
+import { websiteName } from 'settings';
 
 export function RegisterPage() {
   const dispatch = useDispatch();
@@ -62,7 +63,9 @@ export function RegisterPage() {
             <div className="centered-form-wrapper">
               <div className="form-header">
                 <h2>{t(translations.authPage.signUp())}</h2>
-                <h5>{t(translations.authPage.signUpSubtitle())}</h5>
+                <h5>
+                  {t(translations.authPage.signUpSubtitle(), { websiteName })}
+                </h5>
                 <br />
               </div>
               <div className="form-body shrink-children">
@@ -118,14 +121,12 @@ export function RegisterPage() {
                 </div>
               </div>
               <div className="form-footer">
-                <div className="flex-row">
-                  <NavLink to="/sign-in">
-                    <h4>{t(translations.authPage.signIn())}</h4>
-                  </NavLink>
-                  <button type="button" onClick={onSubmit}>
-                    <h4>{t(translations.authPage.submit())}</h4>
-                  </button>
-                </div>
+                <NavLink to="/sign-in">
+                  {t(translations.authPage.signIn())}
+                </NavLink>
+                <button type="button" onClick={onSubmit}>
+                  {t(translations.authPage.submit())}
+                </button>
               </div>
             </div>
           </div>

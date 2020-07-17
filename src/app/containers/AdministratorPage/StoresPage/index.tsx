@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 
 import { StoresForm } from './StoresForm';
-import { Title } from 'app/containers/HomePage/components/Title';
-import { Lead } from 'app/containers/HomePage/components/Lead';
 import { sliceKey, reducer, actions } from '../slice';
 import { administratorSaga } from '../saga';
 import { selectStores } from '../selectors';
@@ -78,19 +76,19 @@ export function StoresPage() {
   }
   return (
     <div>
-      <Title as="h2">Stores</Title>
-      <Lead>
+      <h2>Stores</h2>
+      <h4>
         Every <strong>Store</strong> consists of <strong>Selectors</strong>{' '}
         which are used to extract data from the HTML content of the website.
-      </Lead>
+      </h4>
       <div className="row-3">
         <div>
-          <Lead>Choose action:</Lead>
+          <h2>Choose action:</h2>
           <ActionChooser onChange={onActionChange} action={formAction} />
         </div>
         {canDisplayStoreChooser && (
           <div>
-            <Lead>Choose Store:</Lead>
+            <h2>Choose Store:</h2>
             <StoreChooser
               stores={stores}
               value={store}

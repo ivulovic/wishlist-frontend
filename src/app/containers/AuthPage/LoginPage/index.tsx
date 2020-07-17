@@ -66,14 +66,12 @@ export function LoginPage() {
                 </div>
               </div>
               <div className="form-footer">
-                <div className="flex-row">
-                  <NavLink to="/sign-up">
-                    <h4>{t(translations.authPage.signUp())}</h4>
-                  </NavLink>
-                  <button type="button" onClick={onSubmit}>
-                    <h4>{t(translations.authPage.submit())}</h4>
-                  </button>
-                </div>
+                <NavLink to="/sign-up">
+                  {t(translations.authPage.signUp())}
+                </NavLink>
+                <button type="button" onClick={onSubmit}>
+                  {t(translations.authPage.submit())}
+                </button>
               </div>
             </div>
           </div>

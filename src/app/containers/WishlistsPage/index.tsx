@@ -10,9 +10,7 @@ import { wishlistsSaga } from './saga';
 import { selectWishlists, selectLoading } from './selectors';
 import { Wish } from './components/Wish';
 import { WishUrlForm } from './components/WishUrlForm';
-import { ContentWrapper } from 'app/components/ContentWrapper';
 import { CenteredLoading } from 'app/components/CenteredLoading';
-import { Lead } from '../HomePage/components/Lead';
 
 export function WishlistsPage() {
   const { t } = useTranslation();
@@ -49,31 +47,29 @@ export function WishlistsPage() {
           content="A React Boilerplate application homepage"
         />
       </Helmet>
-      <ContentWrapper>
-        {/* <Title as="h2">{t(translations.wishlists.title())}</Title> */}
-        {isLoading ? (
-          <CenteredLoading style={{ height: '42px', marginBottom: '25px' }} />
-        ) : (
-          <WishUrlForm
-            values={values}
-            onChange={onChange}
-            onSubmit={onSubmitUrl}
+      {/* <Title as="h2">{t(translations.wishlists.title())}</Title> */}
+      {isLoading ? (
+        <CenteredLoading style={{ height: '42px', marginBottom: '25px' }} />
+      ) : (
+        <WishUrlForm
+          values={values}
+          onChange={onChange}
+          onSubmit={onSubmitUrl}
+        />
+      )}
+      <Wrapper>
+        {wishlists.map(wish => (
+          <Wish
+            key={wish.createdAt as number}
+            onRemoveWish={onRemoveWish}
+            {...wish}
           />
-        )}
-        <Wrapper>
-          {wishlists.map(wish => (
-            <Wish
-              key={wish.createdAt as number}
-              onRemoveWish={onRemoveWish}
-              {...wish}
-            />
-          ))}
-        </Wrapper>
+        ))}
+      </Wrapper>
 
-        {!isLoading && !wishlists.length && (
-          <Lead>{t(translations.wishlists.noResults())}</Lead>
-        )}
-      </ContentWrapper>
+      {!isLoading && !wishlists.length && (
+        <h2>{t(translations.wishlists.noResults())}</h2>
+      )}
     </>
   );
 }

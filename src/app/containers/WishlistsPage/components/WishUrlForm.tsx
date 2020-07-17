@@ -12,7 +12,7 @@ export function WishUrlForm({ onChange, onSubmit, values }) {
       />
       <div className="form-footer">
         <button type="button" onClick={onSubmit}>
-          <h4>Submit</h4>
+          Submit
         </button>
       </div>
     </div>

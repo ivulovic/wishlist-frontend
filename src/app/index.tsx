@@ -10,7 +10,7 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Switch, Router as BrowserRouter } from 'react-router-dom';
 
-import { GlobalStyle } from '../styles/global-styles';
+// import { GlobalStyle } from '../styles/global-styles';
 import { useSelector } from 'react-redux';
 import {
   makeSelectIsUserAuthenticated,
@@ -196,7 +196,7 @@ export function App() {
         </div>
       </div>
 
-      <GlobalStyle />
+      {/* <GlobalStyle /> */}
     </BrowserRouter>
   );
 }

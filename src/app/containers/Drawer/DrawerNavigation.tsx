@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import DrawerLogo from './DrawerLogo';
+
 import {
   FiShoppingBag,
   FiUserCheck,
@@ -25,6 +27,8 @@ export default function DrawerNavigation({ isLoggedIn, isSuperUser }) {
       {!isLoggedIn && (
         <>
           <ul className="drawer-navigation">
+            <DrawerLogo />
+
             <>
               <li>
                 <NavLink to="/sign-in" title="Sign In" activeClassName="active">
@@ -64,6 +68,7 @@ export default function DrawerNavigation({ isLoggedIn, isSuperUser }) {
       {isLoggedIn && (
         <>
           <ul className="drawer-navigation">
+            <DrawerLogo />
             <>
               <li>
                 <NavLink exact to="/" activeClassName="active">

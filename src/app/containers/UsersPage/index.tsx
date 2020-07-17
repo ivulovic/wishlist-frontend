@@ -9,10 +9,8 @@ import { sliceKey, reducer, actions } from './slice';
 import { usersSaga } from './saga';
 import { selectWishlists, selectLoading } from './selectors';
 import { Wish } from '../WishlistsPage/components/Wish';
-import { Lead } from '../HomePage/components/Lead';
 import { withRouter } from 'react-router-dom';
 import { CenteredLoading } from 'app/components/CenteredLoading';
-import { ContentWrapper } from 'app/components/ContentWrapper';
 
 function UsersPage(props) {
   const { t } = useTranslation();
@@ -36,19 +34,16 @@ function UsersPage(props) {
           content="A React Boilerplate application homepage"
         />
       </Helmet>
-      <ContentWrapper>
-        {/* <Title as="h2">{t(translations.wishlists.title())}</Title> */}
-        {isLoading && <CenteredLoading />}
-        <Wrapper>
-          {wishlists.map(wish => (
-            <Wish {...wish} />
-          ))}
-        </Wrapper>
+      {isLoading && <CenteredLoading />}
+      <Wrapper>
+        {wishlists.map(wish => (
+          <Wish {...wish} />
+        ))}
+      </Wrapper>
 
-        {!isLoading && !wishlists.length && (
-          <Lead>{t(translations.userPage.noResults())}</Lead>
-        )}
-      </ContentWrapper>
+      {!isLoading && !wishlists.length && (
+        <h2>{t(translations.userPage.noResults())}</h2>
+      )}
     </>
   );
 }

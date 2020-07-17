@@ -4,12 +4,12 @@
 
 import * as React from 'react';
 import { lazyLoad } from 'utils/loadable';
-import { LoadingIndicator } from 'app/components/LoadingIndicator';
+import { CenteredLoading } from 'app/components/CenteredLoading';
 
 export const LandingPage = lazyLoad(
   () => import('./index'),
   module => module.LandingPage,
   {
-    fallback: <LoadingIndicator />,
+    fallback: <CenteredLoading />,
   },
 );

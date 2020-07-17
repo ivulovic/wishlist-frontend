@@ -7,7 +7,6 @@ import { StoresPage } from './StoresPage/Loadable';
 import { UsersPage } from './UsersPage/Loadable';
 import { makeSelectIsSuperUser } from 'app/providers/AuthProvider/selectors';
 import { defaultRedirectRouteForPrivateRouter } from 'settings';
-import { ContentWrapper } from 'app/components/ContentWrapper';
 
 export function AdministratorPage() {
   const baseRoute = '/administrator';
@@ -24,18 +23,15 @@ export function AdministratorPage() {
           content="A React Boilerplate application homepage"
         />
       </Helmet>
-      <ContentWrapper>
-        {/* <Nav /> */}
-        <Switch>
-          <Route
-            exact
-            path={baseRoute}
-            render={() => <Redirect to={`${baseRoute}/stores`} />}
-          />
-          <Route exact component={StoresPage} path={`${baseRoute}/stores`} />
-          <Route exact component={UsersPage} path={`${baseRoute}/users`} />
-        </Switch>
-      </ContentWrapper>
+      <Switch>
+        <Route
+          exact
+          path={baseRoute}
+          render={() => <Redirect to={`${baseRoute}/stores`} />}
+        />
+        <Route exact component={StoresPage} path={`${baseRoute}/stores`} />
+        <Route exact component={UsersPage} path={`${baseRoute}/users`} />
+      </Switch>
     </>
   );
 }

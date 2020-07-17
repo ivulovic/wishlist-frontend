@@ -80,7 +80,7 @@ export function LandingPage() {
             {t(translations.landingPage.paragraphMain())}
           </h1>
           <h2 className="paragraph-secondary">
-            <strong>{websiteLogoText}</strong>
+            <strong className="logo-font">{websiteLogoText}</strong>
             {t(translations.landingPage.paragraphSecondary())}
           </h2>
           <h2 className="paragraph-teritary">

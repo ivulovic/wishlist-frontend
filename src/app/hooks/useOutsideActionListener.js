@@ -4,6 +4,7 @@ export default function useOutsideActionListener(
   ref,
   callBack,
   ignoreElements,
+  deps = [],
 ) {
   React.useEffect(() => {
     function handleClickOutside(event) {
@@ -19,5 +20,5 @@ export default function useOutsideActionListener(
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [ref]);
+  }, [ref, ...deps]);
 }

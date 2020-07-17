@@ -8,7 +8,7 @@ export function LeftSide() {
   const onOpenDrawer = () => dispatch(globalActions.openDrawer());
   return (
     <button className="icon-button" onClick={onOpenDrawer}>
-      <FiMenu id="menu-open" size={32} />
+      <FiMenu id="menu-open" size={24} />
     </button>
   );
 }

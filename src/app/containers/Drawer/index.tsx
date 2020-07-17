@@ -1,13 +1,17 @@
 import React, { useRef } from 'react';
-import DrawerLogo from './DrawerLogo';
 import DrawerNavigation from './DrawerNavigation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useOutsideActionListener from 'app/hooks/useOutsideActionListener';
 import { actions as globalActions } from 'app/providers/GlobalProvider/slice';
+import { makeSelectIsDrawerOpen } from 'app/providers/GlobalProvider/selectors';
 
 const MIN_SCREEN_WIDTH = 1024;
 
 export default function Drawer(props) {
+  const dispatch = useDispatch();
+  const wrapperRef = useRef(null);
+  const isDrawerOpen = useSelector(makeSelectIsDrawerOpen);
+
   const handleDrawerState = screenWidth => {
     if (screenWidth > MIN_SCREEN_WIDTH) {
       dispatch(globalActions.openDrawer());
@@ -27,20 +31,24 @@ export default function Drawer(props) {
     };
   }, []);
 
-  const dispatch = useDispatch();
-  const wrapperRef = useRef(null);
   const onCloseDrawer = () => {
     if (window.innerWidth > MIN_SCREEN_WIDTH) return;
-    dispatch(globalActions.closeDrawer());
+    if (isDrawerOpen) {
+      dispatch(globalActions.closeDrawer());
+    }
   };
 
-  useOutsideActionListener(wrapperRef, onCloseDrawer, ['menu-open']);
+  useOutsideActionListener(
+    wrapperRef,
+    onCloseDrawer,
+    ['menu-open'],
+    [isDrawerOpen],
+  );
   if (!props.isLoggedIn && window.innerWidth > 1024) {
     return <div />;
   }
   return (
     <div className="drawer" ref={wrapperRef}>
-      <DrawerLogo />
       <DrawerNavigation {...props} />
     </div>
   );
