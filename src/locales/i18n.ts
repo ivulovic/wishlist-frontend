@@ -8,6 +8,8 @@ import de from './de/translation.json';
 import sr from './sr/translation.json';
 import { ConvertedToFunctionsType } from './types';
 
+const DEFAULT_LOCALE = window.document.documentElement['lang'];
+
 const translationsJson = {
   en: {
     translation: en,
@@ -53,6 +55,7 @@ export const i18n = i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init(
     {
+      lng: localStorage.getItem('i18nextLng') || DEFAULT_LOCALE,
       resources: translationsJson,
       fallbackLng: 'en',
       debug:
