@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { websiteName } from 'settings';
+import { websiteLogoText } from 'settings';
 
 export function Logo() {
   return (
     <Link to="/" className="logo-font">
-      {websiteName}
+      {websiteLogoText}
     </Link>
   );
 }
