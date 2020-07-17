@@ -40,6 +40,7 @@ import Drawer from './containers/Drawer';
 import NonAuthenticatedWrapper from './wrappers/NonAuthenticatedWrapper';
 import AuthenticatedWrapper from './wrappers/AuthenticatedWrapper';
 import { history } from 'utils/history';
+import { websiteName, websiteMetaDescription } from 'settings';
 
 export function App() {
   const isUserLoggedIn = useSelector(makeSelectIsUserAuthenticated);
@@ -48,11 +49,8 @@ export function App() {
   const isDrawerOpen = useSelector(makeSelectIsDrawerOpen);
   return (
     <BrowserRouter history={history}>
-      <Helmet
-        titleTemplate="%s - React Boilerplate"
-        defaultTitle="React Boilerplate"
-      >
-        <meta name="description" content="A React Boilerplate application" />
+      <Helmet titleTemplate={`%s - ${websiteName}`} defaultTitle={websiteName}>
+        <meta name="description" content={websiteMetaDescription} />
       </Helmet>
       <div
         className={`website-layout-${

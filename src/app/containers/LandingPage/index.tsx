@@ -1,6 +1,10 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { websiteLogoText } from 'settings';
+import {
+  websiteLogoText,
+  websiteMetaTitleLandingPage,
+  websiteMetaDescriptionLandingPage,
+} from 'settings';
 import './index.css';
 import { useTranslation } from 'react-i18next';
 import { translations } from 'locales/i18n';
@@ -71,8 +75,8 @@ export function LandingPage() {
   return (
     <>
       <Helmet>
-        <title>LandingPage</title>
-        <meta name="description" content="LandingPage" />
+        <title>{websiteMetaTitleLandingPage}</title>
+        <meta name="description" content={websiteMetaDescriptionLandingPage} />
       </Helmet>
       <div>
         <div className="section">

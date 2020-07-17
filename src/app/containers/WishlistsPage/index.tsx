@@ -11,6 +11,10 @@ import { selectWishlists, selectLoading } from './selectors';
 import { Wish } from './components/Wish';
 import { WishUrlForm } from './components/WishUrlForm';
 import { CenteredLoading } from 'app/components/CenteredLoading';
+import {
+  websiteMetaDescriptionWishlistPage,
+  websiteMetaTitleWishlistPage,
+} from 'settings';
 
 export function WishlistsPage() {
   const { t } = useTranslation();
@@ -35,19 +39,12 @@ export function WishlistsPage() {
     }
   };
   const onRemoveWish = id => dispatch(actions.removeWishlist(id));
-
-  // const onCreateWish = () =>
-  //   dispatch(actions.createWishlist({ ...tempWish, ...values }));
   return (
     <>
       <Helmet>
-        <title>Home Page</title>
-        <meta
-          name="description"
-          content="A React Boilerplate application homepage"
-        />
+        <title>{websiteMetaTitleWishlistPage}</title>
+        <meta name="description" content={websiteMetaDescriptionWishlistPage} />
       </Helmet>
-      {/* <Title as="h2">{t(translations.wishlists.title())}</Title> */}
       {isLoading ? (
         <CenteredLoading style={{ height: '42px', marginBottom: '25px' }} />
       ) : (

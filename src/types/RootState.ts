@@ -1,4 +1,3 @@
-import { GithubRepoFormState } from 'app/containers/GithubRepoForm/types';
 import { AdministratorState } from 'app/containers/AdministratorPage/types';
 import { ThemeState } from 'styles/theme/types';
 import { WishlistsState } from 'app/containers/WishlistsPage/types';
@@ -15,7 +14,6 @@ import { GlobalState } from 'app/providers/GlobalProvider/types';
 */
 export interface RootState {
   theme?: ThemeState;
-  githubRepoForm?: GithubRepoFormState;
   administrator?: AdministratorState;
   wishlists?: WishlistsState;
   users?: UsersState;

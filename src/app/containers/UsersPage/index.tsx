@@ -28,11 +28,7 @@ function UsersPage(props) {
   return (
     <>
       <Helmet>
-        <title>Home Page</title>
-        <meta
-          name="description"
-          content="A React Boilerplate application homepage"
-        />
+        <title>Users Page</title>
       </Helmet>
       {isLoading && <CenteredLoading />}
       <Wrapper>

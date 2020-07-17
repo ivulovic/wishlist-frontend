@@ -10,8 +10,31 @@
  * @data {string} websiteSupportEmail - Support Email
  * @data {Date} copyrightLastYear - Value of present Year
  */
+export const websiteName = 'Spisko';
 export const websiteLogoText = 'spisko';
-export const websiteName = 'spisko';
+export const websiteMetaDescription = 'Vaš lični spisak - Vaša lista želja';
+export const websiteMetaTitleWishlistPage = 'Lista želja';
+export const websiteMetaDescriptionWishlistPage =
+  'Lista želja. Dodajte svoju želju i podelite sa svojim prijateljima.';
+export const websiteMetaTitleStoresPage = 'Prodavnice';
+export const websiteMetaDescriptionStoresPage =
+  'Prodavnice. Lista prodavnica koje su podržane.';
+
+export const websiteMetaTitleLoginPage = 'Prijavite se';
+export const websiteMetaDescriptionLoginPage =
+  'Ulogujte se. Pristupite Vašoj ličnoj listi i spisku želja.';
+
+export const websiteMetaTitleRegisterPage = 'Napravite nalog';
+export const websiteMetaDescriptionRegisterPage =
+  'Registracija. Napravite nalog i pristupite brzo i jednostavno Vašoj listi i spisku želja.';
+
+export const websiteMetaTitleLandingPage = 'Početna';
+export const websiteMetaDescriptionLandingPage =
+  'Vaš lični spisak - Vaša lista želja';
+
+export const websiteMetaTitleSettingsPage = 'Podešavanja';
+export const websiteMetaDescriptionSettingsPage = `Podešavanja ${websiteName} web aplikacije`;
+
 export const websiteShortName = 'spisko';
 export const websiteContactEmail = 'info@spisko.com';
 export const websiteSupportEmail = 'support@spisko.com';

@@ -18,10 +18,6 @@ export function AdministratorPage() {
     <>
       <Helmet>
         <title>Administrator Page</title>
-        <meta
-          name="description"
-          content="A React Boilerplate application homepage"
-        />
       </Helmet>
       <Switch>
         <Route

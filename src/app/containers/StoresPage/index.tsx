@@ -8,6 +8,10 @@ import { storesSaga } from './saga';
 import { selectStores, selectLoading } from './selectors';
 import { StoreThumbnail } from './components/StoreThumbnail';
 import { CenteredLoading } from 'app/components/CenteredLoading';
+import {
+  websiteMetaDescriptionStoresPage,
+  websiteMetaTitleStoresPage,
+} from 'settings';
 
 export function StoresPage(props) {
   const dispatch = useDispatch();
@@ -23,8 +27,8 @@ export function StoresPage(props) {
   return (
     <>
       <Helmet>
-        <title>Stores</title>
-        <meta name="description" content="Stores page" />
+        <title>{websiteMetaTitleStoresPage}</title>
+        <meta name="description" content={websiteMetaDescriptionStoresPage} />
       </Helmet>
       {isLoading && <CenteredLoading />}
       <Wrapper>
