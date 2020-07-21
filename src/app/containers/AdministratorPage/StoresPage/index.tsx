@@ -20,7 +20,7 @@ export function StoresPage() {
 
   useEffect(() => {
     dispatch(actions.loadStores());
-  }, []);
+  }, [dispatch]);
 
   const onChange = e =>
     setValues({ ...values, [e.target.name]: e.target.value });

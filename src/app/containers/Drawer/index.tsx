@@ -29,7 +29,7 @@ export default function Drawer(props) {
         console.log('removed event listener'),
       );
     };
-  }, []);
+  }, [handleDrawerState]);
 
   const onCloseDrawer = () => {
     if (window.innerWidth > MIN_SCREEN_WIDTH) return;

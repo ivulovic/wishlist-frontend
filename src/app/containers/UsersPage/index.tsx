@@ -23,7 +23,7 @@ function UsersPage(props) {
   useEffect((): any => {
     dispatch(actions.loadWishlists({ id: props.match.params.id }));
     return () => dispatch(actions.resetState());
-  }, [props.match.params.id]);
+  }, [dispatch, props.match.params.id]);
 
   return (
     <>

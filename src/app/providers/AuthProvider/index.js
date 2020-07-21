@@ -22,7 +22,7 @@ function AuthProvider(props) {
   React.useEffect(() => {
     const { initializeAuth } = props;
     initializeAuth();
-  }, []);
+  }, [props]);
 
   return <div />;
 }

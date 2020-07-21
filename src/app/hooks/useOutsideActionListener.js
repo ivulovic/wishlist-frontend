@@ -20,5 +20,5 @@ export default function useOutsideActionListener(
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [ref, ...deps]);
+  }, [callBack, ignoreElements, ref]);
 }

@@ -30,7 +30,7 @@ export function WishlistsPage() {
 
   useEffect(() => {
     dispatch(actions.loadWishlists());
-  }, []);
+  }, [dispatch]);
 
   const onSubmitUrl = () => {
     if (!isLoading && values && values.url && values.url.trim()) {

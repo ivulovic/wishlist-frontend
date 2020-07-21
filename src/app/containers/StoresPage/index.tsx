@@ -22,7 +22,7 @@ export function StoresPage(props) {
 
   useEffect(() => {
     dispatch(actions.loadStores());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

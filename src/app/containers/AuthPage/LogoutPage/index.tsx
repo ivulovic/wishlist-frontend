@@ -13,6 +13,6 @@ export default function Logout() {
     if (isDrawerOpen) {
       dispatch(globalActions.closeDrawer());
     }
-  }, []);
+  }, [dispatch, isDrawerOpen]);
   return null;
 }
