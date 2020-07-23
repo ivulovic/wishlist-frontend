@@ -18,10 +18,10 @@ export const MaterialUIOverride = withStyles({
       backgroundColor: 'var(--background)',
     },
     '.MuiFormLabel-root.Mui-focused': {
-      color: 'var(--primary)',
+      color: 'var(--primary)!important',
     },
     '.MuiInput-underline:before': {
-      borderBottomColor: 'var(--border)',
+      borderBottomColor: 'var(--border)!important',
     },
     '.MuiButton-label': {
       color: 'var(--text)',
@@ -37,7 +37,7 @@ export const MaterialUIOverride = withStyles({
       color: 'var(--text)',
     },
     '.MuiInput-underline:after': {
-      borderBottomColor: 'var(--primary)',
+      borderBottomColor: 'var(--primary)!important',
     },
     '.MuiGrid-root': {
       maxWidth: '100%',
