@@ -11,8 +11,14 @@ export const MaterialUIOverride = withStyles({
       color: 'var(--text)',
     },
     '.MuiFormLabel-root': {
-      borderBottomColor: 'var(--text)',
-      color: 'var(--text)',
+      borderBottomColor: 'var(--text)!important',
+      color: 'var(--text=secondary)!imporant',
+    },
+    '.MuiTypography-colorTextPrimary': {
+      color: 'var(--text)!important',
+    },
+    '.MuiTypography-colorTextSecondary': {
+      color: 'var(--text-secondary)!important',
     },
     '.MuiMenu-list': {
       backgroundColor: 'var(--background)',

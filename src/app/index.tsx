@@ -265,20 +265,6 @@ export function App() {
               isAuthReady={isAuthInitialized}
               layout={AuthenticatedWrapper}
             />
-            {/* <OnlyPublicRoute
-              path="/sign-in"
-              component={LoginPage}
-              isAuthenticated={isUserLoggedIn}
-              isAuthReady={isAuthInitialized}
-              layout={NonAuthenticatedWrapper}
-            />
-            <OnlyPublicRoute
-              path="/sign-up"
-              component={RegisterPage}
-              isAuthenticated={isUserLoggedIn}
-              isAuthReady={isAuthInitialized}
-              layout={NonAuthenticatedWrapper}
-            /> */}
             <PrivateRoute
               path="/sign-out"
               component={LogoutPage}
