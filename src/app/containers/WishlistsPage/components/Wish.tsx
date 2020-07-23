@@ -1,196 +1,145 @@
 import React from 'react';
-import styled from 'styled-components/macro';
 import { useTranslation } from 'react-i18next';
-import { translations } from 'locales/i18n';
-import { FiTrash } from 'react-icons/fi';
 import { WishProps } from '../types';
+
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import { red } from '@material-ui/core/colors';
+import { DEFAULT_LOCALE } from 'locales/i18n';
+import {
+  RiExternalLinkLine,
+  RiLinksLine,
+  RiDeleteBin7Line,
+} from 'react-icons/ri';
+import { translations } from 'locales/i18n';
+const useStyles = makeStyles(theme => ({
+  root: {
+    // maxWidth: 345,
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)',
+  },
+  avatar: {
+    backgroundColor: red[500],
+  },
+}));
 
 const STORE_IMAGE_PATH = '/images/stores/';
 
 export function Wish(props: WishProps): JSX.Element {
+  const classes = useStyles();
   const { t } = useTranslation();
+  const locale = localStorage.getItem('i18nextLng') || DEFAULT_LOCALE;
+  const [isImageBroken, setIsImageBroken] = React.useState(false);
+  const handleImageError = (event): void => setIsImageBroken(true);
+  const fallbackPhoto = '/images/no-photo.png';
   return (
-    <Wrapper>
-      <div className="wish-item">
-        {props.onRemoveWish && (
-          <div
-            className="wish-controls"
-            onClick={() => {
-              if (props.onRemoveWish) {
-                props.onRemoveWish(props._id);
-              }
-            }}
-          >
-            <button type="button">
-              <FiTrash />
-            </button>
-          </div>
-        )}
-        <div
-          className="image-wrapper"
-          style={{ backgroundImage: `url(${props.image})` }}
-        />
-        <div className="wish-info">
-          <p className="title">{props.title}</p>
-          <div className="price">
-            {/* {props.oldPrice && (
-              <span className="old-price">
-                {props.oldPrice} {props.currency}
-              </span>
-            )} */}
-            <span className="current-price">
-              {props.currentPrice} {props.currency}
-            </span>
-          </div>
-        </div>
-        <div className="store-info">
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            className="store-link"
-            href={props.url}
-          >
-            <div
-              className="store-image-wrapper"
-              style={{
-                backgroundImage: `url(${STORE_IMAGE_PATH}${props.store.logo})`,
-              }}
+    <div>
+      <Card className={classes.root}>
+        <CardHeader
+          avatar={
+            <Avatar
+              aria-label="recipe"
+              src={`${STORE_IMAGE_PATH}${props.store.logo}`}
+              className={classes.avatar}
             />
-            <p className="link-text">
-              {/* See this product on {props.store.name} website.{' '} */}
-              {t(translations.wishlists.seeProduct(), {
-                storeName: props.store.name,
-              })}
-            </p>
-          </a>
-        </div>
-      </div>
-    </Wrapper>
+          }
+          title={props.title}
+        />
+        {!isImageBroken ? (
+          <CardMedia
+            className={classes.media}
+            title="Paella dish"
+            style={{ backgroundImage: `url(${props.image})` }}
+          >
+            <img
+              alt="wish product"
+              src={props.image}
+              className="none"
+              onError={handleImageError}
+            />
+          </CardMedia>
+        ) : (
+          <CardMedia
+            className={classes.media}
+            title="Paella dish"
+            image={fallbackPhoto}
+          />
+        )}
+        <CardContent>
+          <div className="flex-row space-between">
+            <Typography variant="body2" color="textPrimary" component="span">
+              {t(translations.wishlists.store())}
+            </Typography>{' '}
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="a"
+              href={props.store.origin}
+              target="new"
+            >
+              {props.store.name}
+            </Typography>
+          </div>
+          <div className="flex-row space-between">
+            <Typography variant="body2" color="textPrimary" component="span">
+              {t(translations.wishlists.price())}
+            </Typography>{' '}
+            <Typography variant="body2" color="textSecondary" component="span">
+              {props.currentPrice} {props.currency}
+            </Typography>
+          </div>
+          <div className="space-between">
+            <Typography variant="body2" color="textPrimary" component="span">
+              {t(translations.wishlists.dateAdded())}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="span">
+              {new Date(props.createdAt as number).toLocaleDateString(locale)}{' '}
+              {t(translations.wishlists.at())}{' '}
+              {new Date(props.createdAt as number).toLocaleTimeString(locale)}
+            </Typography>
+          </div>
+        </CardContent>
+        <CardActions disableSpacing>
+          <IconButton aria-label="share">
+            <RiLinksLine />
+          </IconButton>
+          <IconButton aria-label="visit" href={props.url} target="new">
+            <RiExternalLinkLine />
+          </IconButton>
+          {props.onRemoveWish && (
+            <IconButton
+              className={classes.expand}
+              onClick={() => {
+                if (props && props.onRemoveWish) {
+                  props.onRemoveWish(props._id);
+                }
+              }}
+              aria-label="remove"
+            >
+              <RiDeleteBin7Line />
+            </IconButton>
+          )}
+        </CardActions>
+      </Card>
+    </div>
   );
 }
-
-const Wrapper = styled.div`
-  width: 100%;
-  box-shadow: 1px 1px 15px ${p => p.theme.border};
-  border-radius: 5px;
-  position: relative;
-  &:hover{
-    .wish-controls{
-      display: block;
-    }
-  }
-  .wish-controls {
-    display:none;
-    position: absolute;
-    right: 0;
-    top: 0;
-    margin: 5px 5px;
-    button {
-      border-radius: 3px;
-      cursor: pointer;
-      color: ${p => p.theme.text};
-      background: ${p => p.theme.borderLight};
-      &:hover {
-        // background: ${p => p.theme.border};
-        box-shadow: 0px 0px 8px ${p => p.theme.border};
-      }
-      outline: none;
-      border: none;
-      padding: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-  .image-wrapper {
-    height: 200px;
-    width: 100%;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin: 15px 0px 15px 0px;
-  }
-  .wish-info {
-    padding: 0px 25px;
-
-    .title {
-      text-align: center;
-      font-weight: 500;
-      color: ${p => p.theme.text};
-      min-height: 3rem;
-      max-height: 3rem;
-      overflow: hidden;
-    }
-    .price {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      text-align: center;
-      justify-content: center;
-      padding: 15px 0px;
-    }
-    .old-price {
-      text-align: center;
-      font-size: 1rem;
-      color: ${p => p.theme.negative};
-      text-decoration: line-through;
-      margin-right: 10px;
-      margin-left: -10px;
-    }
-    .current-price {
-      text-align: center;
-      font-size: 1.5rem;
-      color: ${p => p.theme.positive};
-    }
-  }
-
-  .underline {
-    text-decoration: underline;
-  }
-
-  .store-info {
-    border-radius: 0px 0px 5px 5px;
-    background: ${p => p.theme.borderLight};
-    transition: all 0.2s ease-in-out;
-    color: ${p => p.theme.textSecondary};
-    &:hover {
-      background: ${p => p.theme.border};
-    }
-    .store-image-wrapper {
-      height: 32px;
-      width: 32px;
-      margin: 10px;
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
-      border-radius: 5px;
-    }
-    .store-title {
-      margin: 0;
-      padding: 0;
-      font-weight: 500;
-      color: ${p => p.theme.text};
-      white-space: nowrap;
-    }
-    .store-link {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      text-align: center;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-    }
-    .link-text {
-      color: ${p => p.theme.textSecondary};
-      font-size: 13px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-`;

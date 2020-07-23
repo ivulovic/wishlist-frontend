@@ -11,6 +11,7 @@ import { selectWishlists, selectLoading } from './selectors';
 import { Wish } from '../WishlistsPage/components/Wish';
 import { withRouter } from 'react-router-dom';
 import { CenteredLoading } from 'app/components/CenteredLoading';
+import { Typography } from '@material-ui/core';
 
 function UsersPage(props) {
   const { t } = useTranslation();
@@ -33,12 +34,12 @@ function UsersPage(props) {
       {isLoading && <CenteredLoading />}
       <Wrapper>
         {wishlists.map(wish => (
-          <Wish {...wish} />
+          <Wish key={wish.createdAt as number} {...wish} />
         ))}
       </Wrapper>
 
       {!isLoading && !wishlists.length && (
-        <h2>{t(translations.userPage.noResults())}</h2>
+        <Typography>{t(translations.userPage.noResults())}</Typography>
       )}
     </>
   );
@@ -50,5 +51,5 @@ const Wrapper = styled.div`
   display: grid;
   grid-column-gap: 25px;
   grid-row-gap: 25px;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 `;

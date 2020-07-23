@@ -24,9 +24,14 @@
   },
   "wishlists": {
     "title": "Wishlists",
+    "price": "Price",
+    "dateAdded": "Date added",
+    "store": "Store",
+    "at": "at",
     "noResults": "You don't have any wishes at the moment.",
     "lead": "",
-    "seeProduct": "See this product on {{storeName}} website"
+    "seeProduct": "See this product on {{storeName}} website",
+    "urlInputLabel": "Enter product URL"
   },
   "userPage": {
     "noResults": "This user has no wishes at the moment."
@@ -42,6 +47,7 @@
     "passwordConfirm": "Confirm Password",
     "signInSubtitle": "Use Your {{websiteName}} Account",
     "signUpSubtitle": "Create your {{websiteName}} Account",
+    "existingAccount": "Use your existing account",
     "submit": "SUBMIT"
   },
 

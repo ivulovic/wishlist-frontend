@@ -8,6 +8,9 @@ import {
   websiteMetaTitleSettingsPage,
   websiteMetaDescriptionSettingsPage,
 } from 'settings';
+import { Button } from '@material-ui/core';
+import { NavLink } from 'react-router-dom';
+import { RiLogoutBoxLine } from 'react-icons/ri';
 
 export function SettingsPage() {
   const { t } = useTranslation();
@@ -18,11 +21,14 @@ export function SettingsPage() {
         <meta name="description" content={websiteMetaDescriptionSettingsPage} />
       </Helmet>
       <div>
-        <h2>{t(translations.settingsPage.themeLabel())}</h2>
         <ThemeSwitch />
         <br />
-        <h2>{t(translations.settingsPage.languageLabel())}</h2>
         <LanguageSwitch />
+        <br />
+        <Button component={NavLink} to="/sign-out">
+          <RiLogoutBoxLine size={22} />
+          &nbsp; {t(translations.navbar.signOut())}
+        </Button>
       </div>
     </>
   );

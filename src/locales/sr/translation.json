@@ -34,6 +34,7 @@
     "passwordConfirm": "Potvrdite Lozinku",
     "signInSubtitle": "Koristite svoj {{websiteName}} nalog",
     "signUpSubtitle": "Napravite svoj {{websiteName}} nalog",
+    "existingAccount": "Iskoristite već postojeći nalog",
     "submit": "Potvrdi"
   },
 
@@ -44,7 +45,12 @@
     "title": "Lista želja",
     "noResults": "Trenutno nemate nijednu želju.",
     "lead": "",
-    "seeProduct": "Pogledaj proizvod na {{storeName}} sajtu"
+    "price": "Cena",
+    "at": "u",
+    "dateAdded": "Datum",
+    "store": "Prodavnica",
+    "seeProduct": "Pogledaj proizvod na {{storeName}} sajtu",
+    "urlInputLabel": "Unesite URL proizvoda"
   },
   "navbar": {
     "signOut": "Odjava",

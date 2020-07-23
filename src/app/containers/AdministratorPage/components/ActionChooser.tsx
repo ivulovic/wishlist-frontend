@@ -1,36 +1,29 @@
 import React from 'react';
-import { Radio } from 'app/components/Radio';
+import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 
-export function ActionChooser({ onChange, action }) {
+export function ActionChooser({ onChange, value }) {
+  const options = [
+    { value: 'create', label: 'Create' },
+    { value: 'update', label: 'Update' },
+    { value: 'remove', label: 'Remove' },
+  ];
+  const id = 'actionChooser';
   return (
-    <div className="row-3">
-      <Radio
-        id="formActionCreate"
-        label="Create"
-        className="radio"
-        name="formAction"
+    <FormControl className={'auth-input'}>
+      <InputLabel id={`store-action-${id}`}>Choose action</InputLabel>
+      <Select
+        labelId={`store-action-${id}`}
+        id={`store-${id}`}
+        name={id}
+        value={value}
         onChange={onChange}
-        value="create"
-        isSelected={action === 'create'}
-      />
-      <Radio
-        id="formActionUpdate"
-        label="Update"
-        className="radio"
-        name="formAction"
-        onChange={onChange}
-        value="update"
-        isSelected={action === 'update'}
-      />
-      <Radio
-        id="formActionRemove"
-        label="Remove"
-        className="radio"
-        name="formAction"
-        onChange={onChange}
-        value="remove"
-        isSelected={action === 'remove'}
-      />
-    </div>
+      >
+        {options.map(
+          (option: any): JSX.Element => (
+            <MenuItem value={option.value}>{option.label}</MenuItem>
+          ),
+        )}
+      </Select>
+    </FormControl>
   );
 }

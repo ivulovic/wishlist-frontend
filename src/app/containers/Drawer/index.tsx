@@ -44,9 +44,9 @@ export default function Drawer(props) {
     ['menu-open'],
     [isDrawerOpen],
   );
-  if (!props.isLoggedIn && window.innerWidth > 1024) {
-    return <div />;
-  }
+  // if (!props.isLoggedIn && window.innerWidth > 1024) {
+  //   return <div />;
+  // }
   return (
     <div className="drawer" ref={wrapperRef}>
       <DrawerNavigation {...props} />

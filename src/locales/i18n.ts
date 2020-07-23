@@ -8,7 +8,7 @@ import de from './de/translation.json';
 import sr from './sr/translation.json';
 import { ConvertedToFunctionsType } from './types';
 
-const DEFAULT_LOCALE = window.document.documentElement['lang'];
+export const DEFAULT_LOCALE = window.document.documentElement['lang'];
 
 const translationsJson = {
   en: {

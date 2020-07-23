@@ -7,6 +7,7 @@ import {
 } from 'utils/request';
 import { actions } from './slice';
 import { Store } from 'types/Store';
+import { successNotification } from 'utils/notifications';
 
 /**
  * Github repos request/response handler
@@ -20,6 +21,7 @@ export function* getStores() {
     const stores: Store[] = yield call(request, requestURL);
     if (stores?.length > 0) {
       yield put(actions.loadStoresSuccess(stores));
+      // yield put();
     } else {
       // yield put(actions.repoError(RepoErrorType.USER_HAS_NO_REPO));
     }
@@ -46,6 +48,7 @@ export function* createStore(action) {
     );
     if (store) {
       yield put(actions.createStoreSuccess(store));
+      successNotification({ message: 'Store created' });
     } else {
       console.log('Error occured ');
       // yield put(actions.repoError(RepoErrorType.USER_HAS_NO_REPO));
@@ -82,6 +85,7 @@ export function* updateStore(action) {
     );
     if (store) {
       yield put(actions.updateStoreSuccess(store));
+      successNotification({ message: 'Store updated' });
     } else {
       console.log('Error occured ');
       // yield put(actions.repoError(RepoErrorType.USER_HAS_NO_REPO));

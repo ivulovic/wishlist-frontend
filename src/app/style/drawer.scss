@@ -1,3 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Aladin&display=swap');
+
+.logo-font {
+  font-family: 'Aladin', cursive;
+  color: var(--primary);
+}
+.logo {
+  margin: 0px;
+  font-family: 'Aladin', cursive !important;
+  font-weight: 100;
+  padding: 0px 0px;
+}
+.logo a {
+  font-family: 'Aladin', cursive !important;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 48px;
+}
 #menu-open {
   display: none;
 }
@@ -19,6 +37,7 @@
   position: fixed;
   width: 250px;
   height: 100%;
+  background: var(--background);
 }
 .drawer-navigation-wrapper {
   display: flex;
@@ -46,6 +65,7 @@
   display: block;
 }
 .drawer-navigation li a {
+  text-decoration: none;
   color: var(--text);
   font-size: 16px;
   display: flex;

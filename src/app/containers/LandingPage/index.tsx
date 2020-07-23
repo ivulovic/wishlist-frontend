@@ -84,11 +84,14 @@ export function LandingPage() {
             {t(translations.landingPage.paragraphMain())}
           </h1>
           <h2 className="paragraph-secondary">
-            <strong className="logo-font">{websiteLogoText}</strong>
+            <strong className="logo">{websiteLogoText}</strong>
             {t(translations.landingPage.paragraphSecondary())}
           </h2>
           <h2 className="paragraph-teritary">
-            <NavLink to="/sign-in" className="text-button-primary">
+            <NavLink
+              to="/sign-in"
+              className="text-button-primary no-decoration"
+            >
               {t(translations.landingPage.buttonText())}
             </NavLink>
           </h2>

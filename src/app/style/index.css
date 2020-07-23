@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plaster&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Plaster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Aladin&display=swap');
 :root[theme='dark'] {
   --primary: #ffc800;
@@ -50,7 +50,7 @@ body {
 }
 
 /** LAYOUT **/
-@import './layout.css';
+/* @import './layout.css';
 @import './drawer.css';
 @import './forms.css';
-@import './navbar.css';
+@import './navbar.css';  */

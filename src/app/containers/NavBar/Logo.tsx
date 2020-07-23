@@ -4,7 +4,7 @@ import { websiteLogoText } from 'settings';
 
 export function Logo() {
   return (
-    <Link to="/" className="logo-font">
+    <Link to="/" className="logo">
       {websiteLogoText}
     </Link>
   );

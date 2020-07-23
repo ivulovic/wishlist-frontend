@@ -33,37 +33,186 @@ import PrivateRoute from './core/routing/components/PrivateRoute';
 import OnlyPublicRoute from './core/routing/components/OnlyPublicRoute';
 import PublicRoute from './core/routing/components/PublicRoute';
 
-import { makeSelectIsDrawerOpen } from './providers/GlobalProvider/selectors';
-
-import './style/index.css';
-import Drawer from './containers/Drawer';
+import './style/style.scss';
 import NonAuthenticatedWrapper from './wrappers/NonAuthenticatedWrapper';
 import AuthenticatedWrapper from './wrappers/AuthenticatedWrapper';
 import { history } from 'utils/history';
-import { websiteName, websiteMetaDescription } from 'settings';
+import { NavLink } from 'react-router-dom';
+import { websiteName, websiteMetaDescription, websiteLogoText } from 'settings';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { MaterialUIOverride } from './style/material-ui';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import InputBase from '@material-ui/core/InputBase';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Modal from '@material-ui/core/Modal';
+import { InputAdornment } from '@material-ui/core';
+import {
+  RiSettings2Line,
+  RiLoginBoxLine,
+  RiUserAddLine,
+  RiStore2Line,
+  RiSearchLine,
+  RiAdminLine,
+} from 'react-icons/ri';
 
 export function App() {
   const isUserLoggedIn = useSelector(makeSelectIsUserAuthenticated);
   const isSuperUser = useSelector(makeSelectIsSuperUser);
   const isAuthInitialized = useSelector(makeSelectInitializedAuth);
-  const isDrawerOpen = useSelector(makeSelectIsDrawerOpen);
+  const [modal, setModal] = React.useState('');
+
+  const handleModalClose = () => {
+    setModal('');
+  };
+
+  React.useEffect(() => {
+    if (isUserLoggedIn) {
+      handleModalClose();
+    }
+  }, [isUserLoggedIn]);
+
+  const DrawerList = () => {
+    return (
+      <>
+        {isSuperUser && (
+          <ListItem
+            button
+            disableRipple
+            component={NavLink}
+            to="/administrator"
+          >
+            <ListItemIcon>
+              <IconButton>
+                <RiAdminLine size={22} />
+              </IconButton>
+            </ListItemIcon>
+            {/* <ListItemText primary={t(translations.navbar.stores())} /> */}
+          </ListItem>
+        )}
+        <ListItem button disableRipple component={NavLink} to="/stores">
+          <ListItemIcon>
+            <IconButton>
+              <RiStore2Line size={22} />
+            </IconButton>
+          </ListItemIcon>
+          {/* <ListItemText primary={t(translations.navbar.stores())} /> */}
+        </ListItem>
+
+        <ListItem button disableRipple component={NavLink} to="/settings">
+          <ListItemIcon>
+            <IconButton>
+              <RiSettings2Line size={22} />
+            </IconButton>
+          </ListItemIcon>
+          {/* <ListItemText primary={t(translations.navbar.settings())} /> */}
+        </ListItem>
+      </>
+    );
+  };
+  const ModalBody = ({ children }) => {
+    return (
+      <Grid container className="modal-container">
+        <Grid item xs={10} sm={8} md={3} className="modal-content">
+          {children}
+        </Grid>
+      </Grid>
+    );
+  };
   return (
     <BrowserRouter history={history}>
       <Helmet titleTemplate={`%s - ${websiteName}`} defaultTitle={websiteName}>
         <meta name="description" content={websiteMetaDescription} />
       </Helmet>
-      <div
-        className={`website-layout-${
-          isUserLoggedIn && isDrawerOpen ? 'split' : 'full'
-        }`}
+      <MaterialUIOverride />
+      <Modal
+        open={Boolean(modal.length)}
+        onClose={handleModalClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        className="modal"
       >
-        <div className={`drawer-content ${isDrawerOpen ? 'opened' : 'closed'}`}>
-          <Drawer isLoggedIn={isUserLoggedIn} isSuperUser={isSuperUser} />
-        </div>
-        <div className="main-content">
+        <ModalBody>
+          {modal === 'login' && <LoginPage />}
+          {modal === 'register' && <RegisterPage />}
+        </ModalBody>
+      </Modal>
+      <Grid container spacing={3}>
+        <Grid item xs={12} className="header-grid-wrapper">
+          <AppBar position="static">
+            <Toolbar className="space-between">
+              <div className="flex-row">
+                <NavLink to="/" className="no-decoration">
+                  <Typography variant="h6" noWrap className="logo">
+                    {websiteLogoText}
+                  </Typography>
+                </NavLink>
+              </div>
+              <div className="flex-row search-wrapper">
+                <InputBase
+                  placeholder="Search for your friends…"
+                  className="search-input"
+                  onKeyDown={(e: any): void => {
+                    if (e.key === 'Enter') {
+                      const { value } = e.target;
+                      if (value && value.trim()) {
+                        history.push(`/users/${value.trim()}`);
+                      }
+                    }
+                  }}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <RiSearchLine size={20} />
+                    </InputAdornment>
+                  }
+                  inputProps={{ 'aria-label': 'search' }}
+                />
+              </div>
+              <div className="flex-row">
+                {!isUserLoggedIn && (
+                  <List className="flex-row header-nav-list">
+                    <ListItem
+                      button
+                      disableRipple
+                      onClick={() => setModal('login')}
+                    >
+                      <ListItemIcon>
+                        <IconButton>
+                          <RiLoginBoxLine size={22} />
+                        </IconButton>
+                      </ListItemIcon>
+                      {/* <ListItemText primary={t(translations.navbar.signIn())} /> */}
+                    </ListItem>
+                    <ListItem
+                      button
+                      disableRipple
+                      onClick={() => setModal('register')}
+                    >
+                      <ListItemIcon>
+                        <IconButton>
+                          <RiUserAddLine size={22} />
+                        </IconButton>
+                      </ListItemIcon>
+                      {/* <ListItemText primary={t(translations.navbar.signUp())} /> */}
+                    </ListItem>
+                  </List>
+                )}
+                {isUserLoggedIn && (
+                  <List className="flex-row header-nav-list">
+                    <DrawerList />
+                  </List>
+                )}
+              </div>
+            </Toolbar>
+          </AppBar>
+        </Grid>
+        <Grid item xs={12} sm={12} className="website-grid-wrapper">
           <Switch>
-            {/* <Route exact path={process.env.PUBLIC_URL + '/'} component={WishlistsPage} /> */}
-
             {!isUserLoggedIn && (
               <OnlyPublicRoute
                 exact
@@ -82,10 +231,6 @@ export function App() {
               isAuthReady={isAuthInitialized}
               layout={AuthenticatedWrapper}
             />
-            {/* <Route
-              path={process.env.PUBLIC_URL + '/landing'}
-              component={LandingPage}
-            /> */}
             <PublicRoute
               path={process.env.PUBLIC_URL + '/settings'}
               component={SettingsPage}
@@ -95,14 +240,6 @@ export function App() {
                 isUserLoggedIn ? AuthenticatedWrapper : NonAuthenticatedWrapper
               }
             />
-            {/* <Route
-              path={process.env.PUBLIC_URL + '/settings'}
-              component={SettingsPage}
-            /> */}
-            {/* <Route
-              path={process.env.PUBLIC_URL + '/users/:id'}
-              component={UsersPage}
-            /> */}
             <PublicRoute
               path={process.env.PUBLIC_URL + '/users/:id'}
               component={UsersPage}
@@ -112,10 +249,6 @@ export function App() {
                 isUserLoggedIn ? AuthenticatedWrapper : NonAuthenticatedWrapper
               }
             />
-            {/* <Route
-              path={process.env.PUBLIC_URL + '/stores'}
-              component={StoresPage}
-            /> */}
             <PublicRoute
               exact
               path={process.env.PUBLIC_URL + '/stores'}
@@ -126,14 +259,6 @@ export function App() {
                 isUserLoggedIn ? AuthenticatedWrapper : NonAuthenticatedWrapper
               }
             />
-            {/* <PrivateRoute
-            path={process.env.PUBLIC_URL + '/wishlists'}
-            component={WishlistsPage}
-            isAuthenticated={isUserLoggedIn}
-            isAuthReady={isAuthInitialized}
-            layout={({ children }) => <React.Fragment>{children}</React.Fragment>}
-          /> */}
-
             <PrivateRoute
               path={process.env.PUBLIC_URL + '/administrator'}
               component={AdministratorPage}
@@ -141,26 +266,7 @@ export function App() {
               isAuthReady={isAuthInitialized}
               layout={AuthenticatedWrapper}
             />
-
-            {/* <PrivateRoute
-            exact
-            path={process.env.PUBLIC_URL + '/administrator/stores'}
-            component={StoresPage}
-            isAuthenticated={isUserLoggedIn && isSuperUser}
-            isAuthReady={isAuthInitialized}
-            layout={({ children }) => <React.Fragment>{children}</React.Fragment>}
-          />
-
-          <PrivateRoute
-            exact
-            path={process.env.PUBLIC_URL + '/administrator/users'}
-            component={UsersPage}
-            isAuthenticated={isUserLoggedIn && isSuperUser}
-            isAuthReady={isAuthInitialized}
-            layout={({ children }) => <React.Fragment>{children}</React.Fragment>}
-          /> */}
-
-            <OnlyPublicRoute
+            {/* <OnlyPublicRoute
               path="/sign-in"
               component={LoginPage}
               isAuthenticated={isUserLoggedIn}
@@ -173,8 +279,7 @@ export function App() {
               isAuthenticated={isUserLoggedIn}
               isAuthReady={isAuthInitialized}
               layout={NonAuthenticatedWrapper}
-            />
-
+            /> */}
             <PrivateRoute
               path="/sign-out"
               component={LogoutPage}
@@ -191,10 +296,24 @@ export function App() {
               }
             />
           </Switch>
-        </div>
-      </div>
-
-      {/* <GlobalStyle /> */}
+        </Grid>
+        <Grid item xs={12} className="footer-grid-wrapper">
+          <Paper className="footer-wrapper text-center">
+            <small>
+              {websiteName}
+              <span> &reg; </span>
+              {new Date().getFullYear()}
+            </small>
+            <br />
+            <small>
+              All product names, logos, and brands are property of their
+              respective owners. All company, product and service names used in
+              this website are for identification purposes only. Use of these
+              names, logos, and brands does not imply endorsement.
+            </small>
+          </Paper>
+        </Grid>
+      </Grid>
     </BrowserRouter>
   );
 }

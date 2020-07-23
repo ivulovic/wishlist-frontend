@@ -31,7 +31,7 @@ export function StoresPage() {
       formAction === 'create' ? actions.createStore : actions.updateStore;
     dispatch(actionFn(values));
   };
-  const [formAction, setFormAction] = useState('');
+  const [formAction, setFormAction] = useState('create');
   const onActionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     // dispatch(changeTheme(value));
@@ -76,27 +76,17 @@ export function StoresPage() {
   }
   return (
     <div>
-      <h2>Stores</h2>
-      <h4>
-        Every <strong>Store</strong> consists of <strong>Selectors</strong>{' '}
-        which are used to extract data from the HTML content of the website.
-      </h4>
-      <div className="row-3">
-        <div>
-          <h2>Choose action:</h2>
-          <ActionChooser onChange={onActionChange} action={formAction} />
-        </div>
+      <div className="flex-row">
+        <ActionChooser onChange={onActionChange} value={formAction} />
         {canDisplayStoreChooser && (
-          <div>
-            <h2>Choose Store:</h2>
-            <StoreChooser
-              stores={stores}
-              value={store}
-              onChange={onStoreChange}
-            />
-          </div>
+          <StoreChooser
+            stores={stores}
+            value={store}
+            onChange={onStoreChange}
+          />
         )}
       </div>
+      <br />
       {canDisplayForm && (
         <StoresForm onChange={onChange} values={values} onSubmit={onSubmit} />
       )}
