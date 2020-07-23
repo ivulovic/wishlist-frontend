@@ -41,7 +41,6 @@ import { NavLink } from 'react-router-dom';
 import { websiteName, websiteMetaDescription, websiteLogoText } from 'settings';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { MaterialUIOverride } from './style/material-ui';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -60,6 +59,7 @@ import {
   RiSearchLine,
   RiAdminLine,
 } from 'react-icons/ri';
+import { MaterialUIOverride } from './style/material-ui';
 
 export function App() {
   const isUserLoggedIn = useSelector(makeSelectIsUserAuthenticated);
@@ -129,7 +129,6 @@ export function App() {
       <Helmet titleTemplate={`%s - ${websiteName}`} defaultTitle={websiteName}>
         <meta name="description" content={websiteMetaDescription} />
       </Helmet>
-      <MaterialUIOverride />
       <Modal
         open={Boolean(modal.length)}
         onClose={handleModalClose}
@@ -314,6 +313,7 @@ export function App() {
           </Paper>
         </Grid>
       </Grid>
+      <MaterialUIOverride />
     </BrowserRouter>
   );
 }
