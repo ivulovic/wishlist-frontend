@@ -12,7 +12,7 @@ export const MaterialUIOverride = withStyles({
     },
     '.MuiFormLabel-root': {
       borderBottomColor: 'var(--text)!important',
-      color: 'var(--text=secondary)!imporant',
+      color: 'var(--text-secondary)!important',
     },
     '.MuiTypography-colorTextPrimary': {
       color: 'var(--text)!important',
