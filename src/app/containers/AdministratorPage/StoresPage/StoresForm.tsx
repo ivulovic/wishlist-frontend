@@ -10,6 +10,10 @@ const availableParsers = [
     value: 'separateBySpaceAndTakeFirst',
     label: 'Separate by Space and take First',
   },
+  // {
+  //   value: 'separateBySpaceAndTakeFirstTwo',
+  //   label: 'Separate by Space and take First Two',
+  // },
   {
     value: 'separateBySpaceAndTakeLast',
     label: 'Separate by Space and take Last',
