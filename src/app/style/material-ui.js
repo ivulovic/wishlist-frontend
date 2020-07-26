@@ -57,10 +57,22 @@ export const MaterialUIOverride = withStyles({
     '.MuiListItemIcon-root': {
       minWidth: '30px',
     },
+    '.MuiTabs-indicator': {
+      backgroundColor: 'var(--primary)!important',
+    },
+    '.MuiTab-textColorSecondary.Mui-selected': {
+      color: 'var(--primary)!important',
+    },
+    '.MuiTab-textColorSecondary': {
+      color: 'var(--text)!important',
+    },
     '.MuiDrawer-paper': {
       backgroundColor: 'var(--background)',
       borderRight: '1px solid var(--border)',
       // padding: '25px 10px',
+    },
+    '.MuiTabs-root': {
+      backgroundColor: 'var(--background)!important',
     },
   },
 })(() => null);

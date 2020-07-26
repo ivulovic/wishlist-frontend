@@ -10,7 +10,6 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Switch, Router as BrowserRouter } from 'react-router-dom';
 
-// import { GlobalStyle } from '../styles/global-styles';
 import { useSelector } from 'react-redux';
 import {
   makeSelectIsUserAuthenticated,
@@ -50,7 +49,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Modal from '@material-ui/core/Modal';
-import { InputAdornment } from '@material-ui/core';
+import { InputAdornment, Hidden } from '@material-ui/core';
 import {
   RiSettings2Line,
   RiLoginBoxLine,
@@ -58,14 +57,32 @@ import {
   RiStore2Line,
   RiSearchLine,
   RiAdminLine,
+  RiHome3Line,
 } from 'react-icons/ri';
+import { makeStyles } from '@material-ui/core/styles';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 import { MaterialUIOverride } from './style/material-ui';
+import ProfilePage from './containers/ProfilePage';
+
+const useStyles = makeStyles({
+  root: {
+    flexGrow: 1,
+    maxWidth: 500,
+  },
+});
 
 export function App() {
   const isUserLoggedIn = useSelector(makeSelectIsUserAuthenticated);
   const isSuperUser = useSelector(makeSelectIsSuperUser);
   const isAuthInitialized = useSelector(makeSelectInitializedAuth);
   const [modal, setModal] = React.useState('');
+
+  const tabRoutes = {
+    0: '/',
+    1: '/stores',
+    // 2: isSuperUser ? '/administrator' : '/profile',
+  };
 
   const handleModalClose = () => {
     setModal('');
@@ -76,7 +93,13 @@ export function App() {
       handleModalClose();
     }
   }, [isUserLoggedIn]);
+  const classes = useStyles();
+  const [activeTab, setActiveTab] = React.useState(0);
 
+  const handleTabChange = (event, newValue) => {
+    setActiveTab(newValue);
+    history.push(tabRoutes[newValue]);
+  };
   const DrawerList = () => {
     return (
       <>
@@ -102,15 +125,6 @@ export function App() {
             </IconButton>
           </ListItemIcon>
           {/* <ListItemText primary={t(translations.navbar.stores())} /> */}
-        </ListItem>
-
-        <ListItem button disableRipple component={NavLink} to="/settings">
-          <ListItemIcon>
-            <IconButton>
-              <RiSettings2Line size={22} />
-            </IconButton>
-          </ListItemIcon>
-          {/* <ListItemText primary={t(translations.navbar.settings())} /> */}
         </ListItem>
       </>
     );
@@ -172,7 +186,7 @@ export function App() {
                   inputProps={{ 'aria-label': 'search' }}
                 />
               </div>
-              <div className="flex-row">
+              <div>
                 {!isUserLoggedIn && (
                   <List className="flex-row header-nav-list">
                     <ListItem
@@ -201,11 +215,30 @@ export function App() {
                     </ListItem>
                   </List>
                 )}
-                {isUserLoggedIn && (
-                  <List className="flex-row header-nav-list">
-                    <DrawerList />
-                  </List>
-                )}
+                <div className="flex-row">
+                  {isUserLoggedIn && (
+                    <List className="flex-row header-nav-list header-logged-in">
+                      <DrawerList />
+                    </List>
+                  )}
+                  {isUserLoggedIn && (
+                    <List className="flex-row header-nav-list ">
+                      <ListItem
+                        button
+                        disableRipple
+                        component={NavLink}
+                        to="/settings"
+                      >
+                        <ListItemIcon>
+                          <IconButton>
+                            <RiSettings2Line size={22} />
+                          </IconButton>
+                        </ListItemIcon>
+                        {/* <ListItemText primary={t(translations.navbar.settings())} /> */}
+                      </ListItem>
+                    </List>
+                  )}
+                </div>
               </div>
             </Toolbar>
           </AppBar>
@@ -230,7 +263,7 @@ export function App() {
               isAuthReady={isAuthInitialized}
               layout={AuthenticatedWrapper}
             />
-            <PublicRoute
+            <PrivateRoute
               path={process.env.PUBLIC_URL + '/settings'}
               component={SettingsPage}
               isAuthenticated={isUserLoggedIn}
@@ -248,7 +281,7 @@ export function App() {
                 isUserLoggedIn ? AuthenticatedWrapper : NonAuthenticatedWrapper
               }
             />
-            <PublicRoute
+            <PrivateRoute
               exact
               path={process.env.PUBLIC_URL + '/stores'}
               component={StoresPage}
@@ -272,6 +305,13 @@ export function App() {
               isAuthReady={isAuthInitialized}
               layout={NonAuthenticatedWrapper}
             />
+            <PrivateRoute
+              path="/profile"
+              component={ProfilePage}
+              isAuthenticated={isUserLoggedIn}
+              isAuthReady={isAuthInitialized}
+              layout={AuthenticatedWrapper}
+            />
             <PublicRoute
               component={NotFoundPage}
               isAuthenticated={isUserLoggedIn}
@@ -282,23 +322,55 @@ export function App() {
             />
           </Switch>
         </Grid>
-        <Grid item xs={12} className="footer-grid-wrapper">
-          <Paper className="footer-wrapper text-center">
-            <small>
-              {websiteName}
-              <span> &reg; </span>
-              {new Date().getFullYear()}
-            </small>
-            <br />
-            <small>
-              All product names, logos, and brands are property of their
-              respective owners. All company, product and service names used in
-              this website are for identification purposes only. Use of these
-              names, logos, and brands does not imply endorsement.
-            </small>
-          </Paper>
-        </Grid>
+        {!isUserLoggedIn && (
+          <Grid item xs={12} className="footer-grid-wrapper">
+            <Paper className="footer-wrapper text-center">
+              <small>
+                {websiteName}
+                <span> &reg; </span>
+                {new Date().getFullYear()}
+              </small>
+              <br />
+              <small>
+                <br />
+                All product names, logos, and brands are property of their
+                respective owners. <br />
+                <br />
+                All company, product and service names used in this website are
+                for identification purposes only. Use of these names, logos, and
+                brands does not imply endorsement.
+              </small>
+            </Paper>
+          </Grid>
+        )}
       </Grid>
+      {isUserLoggedIn && (
+        <Hidden smUp>
+          <div style={{ marginTop: '45px' }}></div>
+          <Grid item xs={6}>
+            <div style={{ position: 'fixed', bottom: '0', width: '100%' }}>
+              <Paper square>
+                <Tabs
+                  centered
+                  value={activeTab}
+                  onChange={handleTabChange}
+                  indicatorColor="secondary"
+                  textColor="secondary"
+                  variant="fullWidth"
+                  aria-label="icon label tabs example"
+                >
+                  <Tab icon={<RiHome3Line size={20} />} aria-label="Home" />
+                  <Tab icon={<RiStore2Line size={20} />} aria-label="Store" />
+                  {/* <Tab
+                        icon={<RiUser3Line size={20} />}
+                        aria-label="Profile"
+                      /> */}
+                </Tabs>
+              </Paper>
+            </div>
+          </Grid>
+        </Hidden>
+      )}
       <MaterialUIOverride />
     </BrowserRouter>
   );

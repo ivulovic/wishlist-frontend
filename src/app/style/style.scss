@@ -118,6 +118,9 @@ body {
   .header-nav-list .MuiListItemText-root {
     display: none;
   }
+  .header-logged-in {
+    display: none;
+  }
   .search-wrapper {
     flex: 0.8;
   }
@@ -201,4 +204,22 @@ body {
 .nav-menu {
   position: relative;
   background-color: red;
+}
+.profile-avatar-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .MuiAvatar-root {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 25px;
+  }
+  .profile-avatar-username {
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  .profile-avatar-email {
+    color: var(--text-secondary);
+  }
 }
