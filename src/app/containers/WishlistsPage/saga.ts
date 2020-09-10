@@ -19,11 +19,7 @@ export function* getWishlists() {
   try {
     // Call our request helper (see 'utils/request')
     const wishlists: Wishlist[] = yield call(request, requestURL);
-    if (wishlists) {
-      yield put(actions.loadWishlistsSuccess(wishlists));
-    } else {
-      // yield put(actions.repoError(RepoErrorType.USER_HAS_NO_REPO));
-    }
+    yield put(actions.loadWishlistsSuccess(wishlists));
   } catch (err) {
     if (err.response?.status === 404) {
       // yield put(actions.repoError(RepoErrorType.USER_NOT_FOUND));

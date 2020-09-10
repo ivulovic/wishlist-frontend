@@ -35,6 +35,7 @@ const authProviderReducer = (state = initialState, action) =>
           token: null,
           initializedAuth: true,
           isAuthenticated: true,
+          isSuperUser: action.payload.role === 'ADMIN',
         };
       }
 

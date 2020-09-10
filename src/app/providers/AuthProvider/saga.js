@@ -79,39 +79,50 @@ function updateAuthTokenLooper() {
  *      - first take users data
  */
 export function* setupAuthProvider() {
-  const token = getUserAuthToken();
-  if (token) {
-    // update token
-    updateUserAuthToken(token);
-
-    // notify reducer that user is logged in but waiting on user information
-    yield put(hasTokenButWaitingOnUserInformation());
-
-    // yield put(startLoader());
-    try {
-      // api call
-      const res = yield call(
-        request,
-        makeApiUrl('/api/account/info'),
-        makeGetReq(),
-      );
-      // TODO: fetch applications
-      yield put(successfulLogin(res));
-      // ws auth
-    } catch (e) {
-      console.log({ e });
-      // handle errror
-      if (!e.response.ok) {
-        yield put(logoutUser());
-      }
-      // yield handleApiError(e, errorNotification);
-    }
-
-    return;
+  try {
+    const res = yield call(
+      request,
+      makeApiUrl('/auth/account/info'),
+      makeGetReq(),
+    );
+    yield put(successfulLogin(res));
+  } catch (e) {
+    /** prettier-ignore */
   }
+  // const token = getUserAuthToken();
+  // console.log(token);
+  // if (token) {
+  //   // update token
+  //   updateUserAuthToken(token);
+
+  //   // notify reducer that user is logged in but waiting on user information
+  //   yield put(hasTokenButWaitingOnUserInformation());
+
+  //   // yield put(startLoader());
+  //   try {
+  //     // api call
+  //     const res = yield call(
+  //       request,
+  //       makeApiUrl('/auth/account/info'),
+  //       makeGetReq(),
+  //     );
+  //     // TODO: fetch applications
+  //     yield put(successfulLogin(res));
+  //     // ws auth
+  //   } catch (e) {
+  //     console.log({ e });
+  //     // handle errror
+  //     if (!e.response.ok) {
+  //       yield put(logoutUser());
+  //     }
+  //     // yield handleApiError(e, errorNotification);
+  //   }
+
+  //   return;
+  // }
 
   // guest user
-  yield put(guestUser());
+  // yield put(guestUser());
 }
 
 /**
@@ -201,7 +212,7 @@ function* resolveLogin(action) {
     const { payload } = action;
     const content = yield call(
       request,
-      makeApiUrl('/api/account/login'),
+      makeApiUrl('/auth/account/login'),
       makePostReq(payload),
     );
     if (content && content.status !== 404) {
@@ -217,7 +228,7 @@ function* resolveRegister(action) {
     const { payload } = action;
     yield call(
       request,
-      makeApiUrl('/api/account/register'),
+      makeApiUrl('/auth/account/register'),
       makePostReq(payload),
     );
     yield put(login({ email: payload.email, password: payload.password }));

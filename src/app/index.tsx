@@ -168,7 +168,7 @@ export function App() {
               </div>
               <div className="flex-row search-wrapper">
                 <InputBase
-                  placeholder="Search for your friends…"
+                  placeholder="Search for your friends by E-mail…"
                   className="search-input"
                   onKeyDown={(e: any): void => {
                     if (e.key === 'Enter') {

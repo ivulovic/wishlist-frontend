@@ -13,11 +13,7 @@ export function* getStores(action) {
   try {
     // Call our request helper (see 'utils/request')
     const stores: Store[] = yield call(request, requestURL);
-    if (stores?.length > 0) {
-      yield put(actions.loadStoresSuccess(stores));
-    } else {
-      // yield put(actions.repoError(RepoErrorType.USER_HAS_NO_REPO));
-    }
+    yield put(actions.loadStoresSuccess(stores));
   } catch (err) {
     if (err.response?.status === 404) {
       // yield put(actions.repoError(RepoErrorType.USER_NOT_FOUND));

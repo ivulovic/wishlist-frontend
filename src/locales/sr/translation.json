@@ -13,7 +13,6 @@
     "themeLabel": "Tema",
     "languageLabel": "Jezik"
   },
-
   "themeSwitch": {
     "selectTheme": "Odaberite temu",
     "systemTheme": "Sistemska",
@@ -27,6 +26,8 @@
     "signIn": "Prijavite se",
     "signUp": "Registracija",
     "username": "Korisničko ime",
+    "firstName": "Ime",
+    "lastName": "Prezime",
     "usernameOrEmail": "E-mail ili Korisničko ime",
     "usernameError": "Korisničko ime sme da se sastoji samo iz slova i brojeva.",
     "email": "E-mail",
@@ -37,7 +38,6 @@
     "existingAccount": "Iskoristite već postojeći nalog",
     "submit": "Potvrdi"
   },
-
   "userPage": {
     "noResults": "Korisnik trenutno nema nijednu želju."
   },
@@ -90,7 +90,6 @@
     "howToUseSubtitle": "Kako se koristi?",
     "howToUseTitle": "Do želje kroz 3 jednostavna koraka",
     "howToUseDescription": "Sa našim jednostavnim i lakim načinom korišćenja od želja Vas dele sekunde.",
-
     "wishStep1": "Unesite web link proizvoda",
     "wishStep2": "Sačekajte par sekundi",
     "wishStep3": "Vaša nova želja je dodata"

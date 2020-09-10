@@ -32,6 +32,8 @@ export function RegisterPage() {
 
   const [email, setEmail] = React.useState('');
   const [username, setUsername] = React.useState('');
+  const [firstName, setFirstName] = React.useState('');
+  const [lastName, setLastName] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
 
@@ -49,8 +51,11 @@ export function RegisterPage() {
       case 'email':
         setEmail(e.target.value);
         break;
-      case 'username':
-        setUsername(e.target.value);
+      case 'firstName':
+        setFirstName(e.target.value);
+        break;
+      case 'lastName':
+        setLastName(e.target.value);
         break;
       case 'password':
         setPassword(e.target.value);
@@ -66,12 +71,12 @@ export function RegisterPage() {
   const onSubmit = () => {
     if (
       email &&
-      username &&
-      testUsername() &&
+      firstName &&
+      lastName &&
       password &&
       password === confirmPassword
     ) {
-      dispatch(register({ email, username, password }));
+      dispatch(register({ email, firstName, lastName, password }));
     }
   };
   return (
@@ -125,12 +130,31 @@ export function RegisterPage() {
         </div>
         <div>
           <FormControl className="auth-input">
-            <InputLabel htmlFor="register-username">
-              {t(translations.authPage.username())}
+            <InputLabel htmlFor="register-firstName">
+              {t(translations.authPage.firstName())}
             </InputLabel>
             <Input
-              id="register-username"
-              name="username"
+              id="register-firstName"
+              name="firstName"
+              type={'text'}
+              value={undefined}
+              onChange={onChange}
+              endAdornment={
+                <InputAdornment position="end">
+                  <RiUser3Line size={20} />
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+        </div>
+        <div>
+          <FormControl className="auth-input">
+            <InputLabel htmlFor="register-lastName">
+              {t(translations.authPage.lastName())}
+            </InputLabel>
+            <Input
+              id="register-lastName"
+              name="lastName"
               type={'text'}
               value={undefined}
               onChange={onChange}

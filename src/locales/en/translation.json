@@ -41,6 +41,8 @@
     "signUp": "Register",
     "email": "E-mail",
     "username": "Username",
+    "firstName": "First name",
+    "lastName": "Last name",
     "usernameOrEmail": "Username or E-mail",
     "usernameError": "Username should contain only letters and numbers.",
     "password": "Password",
@@ -50,7 +52,6 @@
     "existingAccount": "Use your existing account",
     "submit": "SUBMIT"
   },
-
   "navbar": {
     "signOut": "Sign out",
     "signIn": "Sign in",
