@@ -1,7 +1,8 @@
 {
   "homePage": {
     "title": "Wishlists",
-    "subtitle": "All wishes in one place"
+    "subtitle": "All wishes in one place",
+    "linkCopied": "Link to Your wishlist is copied"
   },
   "settingsPage": {
     "themeLabel": "Theme",

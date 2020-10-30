@@ -1,7 +1,8 @@
 {
   "homePage": {
     "title": "Lista Želja",
-    "subtitle": "Sve želje na jednom mestu"
+    "subtitle": "Sve želje na jednom mestu",
+    "linkCopied": "Putanja do Vaše liste želja je iskopirana"
   },
   "features": {
     "createTitle": "Napravite svoju listu želja",

@@ -74,5 +74,13 @@ export const MaterialUIOverride = withStyles({
     '.MuiTabs-root': {
       backgroundColor: 'var(--background)!important',
     },
+    '.MuiAlert-filledSuccess': {
+      color: '#fff!important',
+      fontWeight: '500',
+      backgroundColor: '#4caf50!important',
+    },
+    '.MuiAlert-action .MuiIconButton-root': {
+      color: '#fff!important',
+    },
   },
 })(() => null);

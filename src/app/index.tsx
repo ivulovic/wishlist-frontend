@@ -15,13 +15,15 @@ import {
   makeSelectIsUserAuthenticated,
   makeSelectInitializedAuth,
   makeSelectIsSuperUser,
+  makeSelectUserEmail,
 } from 'app/providers/AuthProvider/selectors';
 import { NotFoundPage } from './containers/NotFoundPage/Loadable';
 import { WishlistsPage } from './containers/WishlistsPage/Loadable';
 import { AdministratorPage } from './containers/AdministratorPage/Loadable';
 import { UsersPage } from './containers/UsersPage/Loadable';
 import { StoresPage } from './containers/StoresPage/Loadable';
-
+import { useTranslation } from 'react-i18next';
+import { translations } from 'locales/i18n';
 import LoginPage from './containers/AuthPage/LoginPage/Loadable';
 import RegisterPage from './containers/AuthPage/RegisterPage/Loadable';
 import { SettingsPage } from './containers/SettingsPage/Loadable';
@@ -49,6 +51,8 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Modal from '@material-ui/core/Modal';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import { InputAdornment, Hidden } from '@material-ui/core';
 import {
   RiSettings2Line,
@@ -58,6 +62,7 @@ import {
   RiSearchLine,
   RiAdminLine,
   RiHome3Line,
+  RiShareLine
 } from 'react-icons/ri';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
@@ -72,7 +77,13 @@ const useStyles = makeStyles({
   },
 });
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 export function App() {
+  const { t } = useTranslation();
+  const userEmail = useSelector(makeSelectUserEmail);
   const isUserLoggedIn = useSelector(makeSelectIsUserAuthenticated);
   const isSuperUser = useSelector(makeSelectIsSuperUser);
   const isAuthInitialized = useSelector(makeSelectInitializedAuth);
@@ -93,12 +104,23 @@ export function App() {
       handleModalClose();
     }
   }, [isUserLoggedIn]);
-  const classes = useStyles();
   const [activeTab, setActiveTab] = React.useState(0);
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
     history.push(tabRoutes[newValue]);
+  };
+  const [snackbarShown, setSnackbarShown] = React.useState(false);
+
+  const handleSnackbarOpen = () => {
+    setSnackbarShown(true);
+  };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbarShown(false);
   };
   const DrawerList = () => {
     return (
@@ -138,6 +160,14 @@ export function App() {
       </Grid>
     );
   };
+  const handleWishlistLinkCopy = () => {
+    const sharedWishlistLink = window.origin + "/users/" + userEmail;
+    navigator.clipboard.writeText(sharedWishlistLink).then(function () {
+      handleSnackbarOpen();
+    }, function (err) {
+
+    });
+  }
   return (
     <BrowserRouter history={history}>
       <Helmet titleTemplate={`%s - ${websiteName}`} defaultTitle={websiteName}>
@@ -223,6 +253,17 @@ export function App() {
                   )}
                   {isUserLoggedIn && (
                     <List className="flex-row header-nav-list ">
+                      <ListItem
+                        button
+                        disableRipple
+                        onClick={handleWishlistLinkCopy}
+                      >
+                        <ListItemIcon>
+                          <IconButton>
+                            <RiShareLine size={22} />
+                          </IconButton>
+                        </ListItemIcon>
+                      </ListItem>
                       <ListItem
                         button
                         disableRipple
@@ -345,31 +386,39 @@ export function App() {
         )}
       </Grid>
       {isUserLoggedIn && (
-        <Hidden smUp>
-          <div style={{ marginTop: '45px' }}></div>
-          <Grid item xs={6}>
-            <div style={{ position: 'fixed', bottom: '0', width: '100%' }}>
-              <Paper square>
-                <Tabs
-                  centered
-                  value={activeTab}
-                  onChange={handleTabChange}
-                  indicatorColor="secondary"
-                  textColor="secondary"
-                  variant="fullWidth"
-                  aria-label="icon label tabs example"
-                >
-                  <Tab icon={<RiHome3Line size={20} />} aria-label="Home" />
-                  <Tab icon={<RiStore2Line size={20} />} aria-label="Store" />
-                  {/* <Tab
+        <>
+          <Hidden smUp>
+            <div style={{ marginTop: '45px' }}></div>
+            <Grid item xs={6}>
+              <div style={{ position: 'fixed', bottom: '0', width: '100%' }}>
+                <Paper square>
+                  <Tabs
+                    centered
+                    value={activeTab}
+                    onChange={handleTabChange}
+                    indicatorColor="secondary"
+                    textColor="secondary"
+                    variant="fullWidth"
+                    aria-label="icon label tabs example"
+                  >
+                    <Tab icon={<RiHome3Line size={20} />} aria-label="Home" />
+                    <Tab icon={<RiStore2Line size={20} />} aria-label="Store" />
+                    {/* <Tab
                         icon={<RiUser3Line size={20} />}
                         aria-label="Profile"
                       /> */}
-                </Tabs>
-              </Paper>
-            </div>
-          </Grid>
-        </Hidden>
+                  </Tabs>
+                </Paper>
+              </div>
+            </Grid>
+          </Hidden>
+
+          <Snackbar open={snackbarShown} autoHideDuration={5000} onClose={handleSnackbarClose}>
+            <Alert onClose={handleSnackbarClose} color="success">
+              {t(translations.homePage.linkCopied())}
+            </Alert>
+          </Snackbar>
+        </>
       )}
       <MaterialUIOverride />
     </BrowserRouter>
